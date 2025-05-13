@@ -26,6 +26,8 @@ select *
 order by deptno asc, sal desc;
 -- depento asc, sal desc; 이 상황에서 연봉이 같은 애들 사원번호로 내림차순 정렬하시오.
 
+-- 부서번호로 오름차순, 겹치면 sal 내림차순
+
 select * 
     from emp
 order by deptno asc, sal desc, empno desc;
