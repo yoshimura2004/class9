@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>회원정보</h1>
+    <form>
+        <fieldset><legend> 인적사항 </legend>
+        이 름 : <input type="text" placeholder="ID 입력요망">  
+        주민번호 : <input type="password">-<input type="password">
+        <br>
+        국 적 : <select name = "country"> 
+            <option value = "country"> 내국인(대한민국)</option>
+        </select>
+        <br>
+        취득 자격증:<select name = "colm"> 
+            <option value = "colm"> 정보처리기사 1급</option>
+        </select>
+        </fieldset>
+    <fieldset>
+        <legend>성별&학년</legend>
+    성별: <input type = "radio" name = "gender" value = "male"> 남성       
+         <input type = "radio" name = "gender" value = "female">  여성   
+         <br>
+    학년:     <input type = "radio" name = "grade" value = "1">  1학년       
+         <input type = "radio" name = "grade" value = "2">  2학년       
+         <input type = "radio" name = "grade" value = "3">  3학년       
+         <input type = "radio" name = "grade" value = "4">  4학년       
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend>취미</legend>
+         <input type = "checkbox" value = "1">  독서
+         <input type = "checkbox" value = "2"> 바둑
+         <input type = "checkbox" value = "3">  골프
+         <input type = "checkbox" value = "4"> 등산
+         <input type = "checkbox" value = "5"> 여행
+         <input type = "checkbox" value = "6"> 기타
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend>메모사항</legend>
+        <textarea rows = "5" cols = "100"> 메모글을 남겨 주세요</textarea>
+    </fieldset>
+    <br>
+첨부서류: <button type="submit"> 파일선택</button> 선택된 파일 없음
+    <br>
+    <br>
+ <button type="submit"> 저장하기</button>
+ <button type="submit"> 다시 입력하기</button> 
+
+
+</form>
+</body>
+</html>

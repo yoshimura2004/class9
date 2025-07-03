@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Clone</title>
+  <style>
+
+    body {
+      margin: 0;
+      font-family: Arial;
+      background-color: white;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .mainlogo {
+      font-weight: bold;
+      color: red;
+      font-size: 20px;
+    }
+
+    .searchbar input {
+      width: 400px;
+      padding: 8px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .sidelogo {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 200px;
+      height: 100vh;
+      background-color: #f8f8f8;
+      padding: 20px;
+      box-shadow: 1px 0 5px rgba(0,0,0,0.1);
+    }
+
+    .sidebar div {
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    .container-tags {
+      margin-left: 245px;
+      padding: 10px;
+      white-space: nowrap;
+      overflow-x: auto;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #eee;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-right: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .tag:hover {
+      background-color: #ddd;
+    }
+
+ 
+    .main-content {
+      margin-left: 220px;
+      padding: 20px;
+    }
+
+    .videos{
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 20px;
+    }
+    .shorts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .video, .short {
+      width: 300px;
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .short {
+      width: 150px;
+    }
+
+    .shorts-title {
+      margin-top: 40px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="mainlogo">YouTube</div>
+    <div class="searchbar"><input type="text" placeholder="검색"></div>
+    <div class="sidelogo">🔔 로그인</div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div>≡</div>
+    <div>홈</div>
+    <div>Shorts</div>
+    <div>구독</div>
+    <div>내 페이지</div>
+    <div>Youtube</div>
+    <div>시청 기록</div>
+  </div>
+
+  <!-- Tags -->
+  <div class="container-tags">
+    <div class="tag">전체</div>
+    <div class="tag">음악</div>
+    <div class="tag">라이브</div>
+    <div class="tag">게임</div>
+    <div class="tag">뉴스</div>
+    <div class="tag">팟케스트</div>
+    <div class="tag">야구</div>
+    <div class="tag">요리</div>
+    <div class="tag">축구</div>
+    <div class="tag">관광지</div>
+    <div class="tag">최근에 업로드된 동영상</div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h3>메인 동영상</h3>
+    <div class="videos">
+      <div class="video">동영상 1
+        <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="video">동영상 2
+        <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루"></div>
+      <div class="video">동영상 3
+        <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+    </div>
+    <!-- Short Content -->
+    <div class="shorts-title">Shorts</div>
+    <div class="shorts">
+      <div class="short">쇼츠1
+        <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+        <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+        <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      <div class="short">쇼츠1
+          <img src = "https://www.opportunityhome.org/wp-content/uploads/2013/03/image-alignment-150x150.jpg" alt=" 몰루">
+      </div>
+      
+    </div>
+  </div>
+</body>
+</html>

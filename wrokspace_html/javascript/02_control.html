@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+
+    // for (i = 2; i<= 9; i++) {
+    //     for (j = 1; j<= 9; j++)
+    //     console.log(i + "x" + j + "=" + i*j)
+    // }
+
+    const temp = 0;
+    if(temp){
+        document.write("참 입니다")
+    }else {
+        document.write("거짓 입니다.")
+    }
+
+    if(temp >= 0) {
+        console.log("영상" , temp + "도 입니다");
+    } else {
+        console.log(`영하 ${temp*-1} 도 입니다.`);
+    }
+    
+    /*
+     JS에서의 참(true)이란
+     거짓이 아닌 것
+     즉 !거짓
+     거짓이란:  false, 0, null, undefined, NaN
+    */
+
+    console.log("=======배열 배우고 다시 살아 돌아 왔다.========")
+
+    let arr = [10, 20, 30];
+    arr[10] = 100;
+    arr["주소"] = "천안시"; //length에 안들어강.
+    console.log("arr.length : " + arr.length);
+
+    console. log ("arr", arr)
+    // for in
+    // in 앞의 변수에 현재의 index를 저장 
+    for (let index in arr ){
+        console.log("index:", index);
+        console.log("index:", arr[index]);
+        // console.log(arr);
+    }
+
+    // for of
+    // of 앞의 변수에 현재의 값을 저장
+    // java의 향상된 for문과 비슷하다.
+    // index "주소" 처럼 숫자가 아닌 index는 못 가져온다.
+    // 현재 몇 번째 반복인지 알 수 없다.
+    // let i = 0;
+    // for ( let obj of arr ){
+    // console.log("obj :", obj, i++)
+    // }
+
+    let array = [];
+    array[2] = "[1,1]";
+    array[3] = "[1,2]";
+    array[3] += "[2,1]";
+
+     if(array[4] == undefined) {
+        console.log("array[4]:", array[4])
+        } 
+    array[4] += "abc";
+    console.log(array[4]);
+    
+    let diceSum = [];
+    for (let i = 1; i <= 6; i++) {
+    for (let j = 1; j <= 6; j++) {
+    if(diceSum[i+j]== undefined){
+    diceSum[i+j] = ''
+    }
+    diceSum[i+j] += `[${i},${j}]`;  
+    }
+    }
+    console.log(diceSum);
+    for(let i in diceSum){
+    console.log(i, diceSum[i])
+    }
+
+
+
+
+
+
+    
+
+    
+    
+
+
+
+
+
+
+
+</script>
+<body>
+    
+</body>
+</html>

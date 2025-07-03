@@ -1,0 +1,44 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script>
+        d = 30; 
+
+        //호이스팅
+        // 아무것도 안쓴 선언은 최상단으로 호이스팅된다.<script>바로 밑.
+        //  let이나 const는 지역scope var는 함수scope
+
+        let e = 40;   // 호이스팅은 어려우니까 그냥 이렇게 씁시다.        
+
+        // 선언된 적이 없다. not defined
+        // console.log("a :", a); 
+        let f = 5;
+        console.log(f);
+
+        function test (){
+        var b; //호이스팅               
+        //var는 함수 최상단으로 호이스팅 된다.            
+
+        if(true){
+        // var b = 10;  //호이스팅 발생
+        b = 10;                
+        let c = 20; // java의 지역변수.
+
+        d =30;      // 호이스팅 발생
+        }
+        console.log("b:", b);
+        // console.log("c:",c); // 선언된 적이 없다.
+        console.log("d:", d);
+        }
+        test();
+        // console.log("b:", b);   var b는 test함수 지역변수
+        console.log("d:", d);
+        </script>
+        </head>
+        <body>
+
+        </body>
+        </html>

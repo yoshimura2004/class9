@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href = "#bottom">
+        맨 아래로
+    </a>
+    <p id = "top">
+    id top 자리에요
+    </p>
+
+    <a href = "http://naver.com"> 네이버 </a>
+    <br>
+    <a href = "http://google.com" target = "_blank"> 구글 </a>
+    <br>
+
+    <a href = "http://naver.com" target = "_blank" >
+            <img src="https://search.pstatic.net/common?type=f&size=206x268&quality=75&direct=true&src=https%3A%2F%2Fshared-comic.pstatic.net%2Fthumb%2Fwebtoon%2F837864%2Fthumbnail%2Fthumbnail_IMAG21_a12c4c42-57ca-48fc-aef3-f3348a36962c.jpg" width="455">
+  
+</a>
+<br>
+
+<a href = "tel : 01063984128"> </a>
+
+<!-- 상대 주소-->
+ <!--
+ 내 위치를 기준으로 삼는 주소 나누기로 시작하지 않으면 무조건 상대주소.
+ . : 내 푤더
+ ..:       
+ 부모폴더
+
+ 가장 마지막 / 이후의 주소를 갈아 치운다. 
+ -->
+<a href = "test/sample.html">test/sample.html</a>
+<br>
+<a href = ".test/sample.html">.test/sample.html</a>
+<br>
+
+<!--절 대 주 소-->
+<!--1. 포로토콜(http https 등)로 시작하거나
+    2. //로 시작하거나 (http://)
+    3. /로 시작하거나 
+    3-0. 주소체계란 ip:port/주소들
+    3-1. ip port 다음에 나오는 /를 기준을 주소로 한다.
+    
+    -->
+<a href = "http://naver.com ">  네이버 </a>
+<a href = "http://naver.com ">  네이버 </a>
+<!-- http:// 127.0.01: 5500 /html/06_a.html-->
+<a href = "/html/06._html"> HTML </a>
+<a href = "/html/test/sample.html">   HTML </a>
+
+
+
+<a href = "http://naver.com ">  네이버 </a>
+<p style = "height: 1000px;">
+    첫 문단 1000px
+</p>
+<a href = "#top"> 맨 위로 </a>
+
+<strong id = "bottom"> 
+    id bottom 자리 
+</strong>
+
+
+</body>
+</html>

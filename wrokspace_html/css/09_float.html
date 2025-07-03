@@ -1,0 +1,102 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        </head>
+        <style>
+        article img {
+        float: right;
+        border: 1px solid red;
+        }
+
+        .box {
+        border: 1px solid red;
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        }
+
+        .box.left {
+        float: left;
+        border: 1px solid blue;
+        } 
+
+        .box.right {
+        /* position: relative;
+        left: 15px; */
+        float:right;
+        } 
+
+        .img1 {
+        width: 90px;
+        }
+        .d1 {
+        background-color: rgb(239, 184, 184);
+        }
+        .d2 {
+
+        background-color: yellow;
+        }
+        .d3 {
+        background-color: rgb(171, 146, 146);
+        }
+        .clear {
+        clear: both;
+        }
+        .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+        }
+        .logo{
+        width:100px;
+        background-color: rgb(171, 146, 146, 0.8);
+        display:inline-block
+        }
+        .clearfix-menu{
+        text-align: center;
+        }
+        /* 반드시 기억할 것. */
+        </style>
+        <body>
+        <article>
+        <img class = "img1" src ="https://www.nc.press/news/photo/202310/534246_665628_2552.jpg">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti quam dolores temporibus harum dolore nam voluptatum expedita, repellat obcaecati ad accusamus quis, odit laborum praesentium debitis exercitationem iste quasi. Cumque. 
+        </article>
+        <div style = "clear: both;"></div>
+
+        <div class = "box left">1</div>
+        <div class = "box left">2</div>
+        <div class = "box right">3</div>
+        <div class = "box right">4</div>
+        <div style = "clear: both;"></div>
+        <!-- <div>LuvMj</div>
+        <div>FourUnforgettiveMj</div> -->
+        <!-- <div style = "overflow: hidden;"> 방법 중 하나이다. -->
+
+        <div>
+        <div class = "box d1 left">d1</div>
+        <div class = "box d2 right">d2</div>
+        <div class = "clear"></div>
+        </div>
+        <div class = "d3">d3</div>
+
+        <div class ="clearfix">
+        <div class = "box d1 left">d11</div>
+        <div class = "box d2 right">d12</div>
+        </div>
+        
+        <div class = "d3">d33</div>
+
+        <div>LuvMj</div>
+
+        <div class ="clearfix-menu">
+        <div class = "box left">left menu</div>
+        <div class = "logo">center menu</div>
+        <div class = "box right">right menu</div>
+        </div>
+
+        </body>
+        </html>

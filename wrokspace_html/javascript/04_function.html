@@ -1,0 +1,230 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        </head>
+        <script>
+        // function 키워드로 함수를 선언합니다.
+        // 양식 return타입이 없다
+        // function 함수명(전달인자들){}
+        // 전달인자에는 타입을 적지 않는다.
+
+        function plus (x, y){
+        console.log("x :", x)
+        console.log("y :", y)
+
+        let z = x + y;
+        return z;
+        }
+        console.log("=================="); 
+        let a = plus(2,3);
+        console.log("a :", a); 
+        console.log("=================="); 
+        let b = plus();  // 값이 입력되지 않았으니 undefined
+        console.log("b :", b); // 입력되지 않은 값을 더한 것이니 오류 NaN.
+        console.log("=================="); 
+        let c = plus(4);        //값이 x 하나만 적용되어 x의 값만 도출
+        console.log("c :", c);  //y 값은 그대로 undefiend이고, 
+        console.log("==================");  //여전히 undefiend와 연산이 안되므로 NaN
+        let d = plus(4,5,6,7,8);
+        console.log("d :", d);          // 가장 앞에 있는 4,5의 값만 취급하여, 9
+
+        function plus2(x,y){
+        if(x == undefined){
+        x = 0;
+        }
+        if(y == undefined){
+        y = 0;
+        }
+        if(!x){
+        x = 0;
+        }
+        if(!y){
+        y = 0;
+        }
+
+        return x + y;
+        }
+        //전달인자가 없는 경우 초깃값 적용 있으면 전달인자 사용.
+        function plus3 (x=0, y=1){
+        return x + y;
+        }
+
+        console.log(1,2,3,4,5,6);
+
+        // spread 연산자
+        function log( ...obj ){
+        console.log( typeof obj ) // 배열 
+        console.log(obj[1])
+        console.log(obj)
+        }
+
+        log(1,2);
+        let f = [10,20]
+        console.log(...f);         //이거랑
+        console.log(f[0], f[1]);   // 이거랑 같음.
+        console.log(10,20)         // 이거랑 같음.
+
+        let g = "console.log(123)";
+        eval(g); // string을 javascript로 표현해주는 아이 이다.
+
+        function print(){
+        console.log("print 실행")
+        }
+
+        let p = print;
+        console.log("typeof p : ", typeof p);
+        p();
+
+        let p2 = print();
+        console.log("p2 :" + p2);
+
+        console.log("typeof print :", typeof print);
+
+        function print2(){
+        console.log("print2 실행")
+        }
+        function print2(){
+        console.log("print3(거짓말) 실행")
+        }               //함수명이 같으면 중복이 가능하다.
+        print2();
+
+        function over(x){
+        console.log("x:",x)
+        }
+        function over(x,y){
+        console.log("x,y:", x, y)
+        }
+        over(1);
+        console.log( 1, typeof over )
+        
+        over = 1;
+        console.log( 2, typeof over )
+        // over();
+
+        // call back 전달인자를 함수에게 맡기는 것을 callback 함수라 한다.
+        // 원달러 환율 계산기 함수
+        function change_en_ko(dollar){ 
+                return dollar * 1354.75;
+        }
+        //달러 원 환율 계산 함수
+        function change_ko_en(won){ 
+                return won / 1354.75;
+        }
+        // 환전 함수 
+        // 전달인자: 금액, 환율 계산 함수
+
+        function change(money, callback){
+        console.log("환전 시작") 
+
+        if (typeof callback == "function"){       
+        let result = callback(money)
+        return result;
+        } else {
+                console.log("callback이 함수가 아님.")
+        }
+        }
+        const money = change(100 , change_en_ko);
+        console.log("환전금액은", money, "입니다")
+        change(100, 100);
+
+        // 익명 함수
+        let noName = function (){
+                console.log("이건 익명함수에요.")
+        }
+        noName();
+
+        //위의 것과 완벽히 동일하다.
+        // function noName (){
+        //         console.log("이건 익명함수에요.")
+        // }
+
+        const m = 100;
+        change(m,noName);
+        change(100, function(){
+                console.log("익함")
+        });
+
+        console.log("---------------------------------")
+        // 전달인자가 2개 setTimeout
+        // 첫번째 전달인자 : 실행할 함수 (콜백함수)
+        // 두번째 전달인자 : 지연 시간(1/1000초)
+        // setTimeout(noName, 1000*4);
+
+        let st1 = setTimeout(function (){
+        console.log("4초 뒤 등장.")
+        }, 1000*4);
+        console.log("콘솔 출력");
+        console.log("st1",st1)
+        clearTimeout (st1)
+
+        let time = 30;
+        
+        setTimeout(function (t , y){
+        console.log("4초 뒤 등장2." , time, t)
+        }, 1000,time,"b");
+
+        let si = setInterval(function(){
+                console.log("setInterval 실행")
+                console.log(",")
+        }, 1000*2);
+        // clearInterval(si) 예약 취소
+
+
+        setTimeout(function(){
+                clearInterval(si)
+        }, 5000);
+
+        //arrow 함수 화살표함수
+
+        let test0 = function (a, b){
+        console.log(a,b)
+        return a;
+        }
+
+        //익명 함수일 경우 화살표 함수로 변경할 수 있다.
+        let test1 = (a, b) => {
+        console.log(a,b)
+        return a;
+        }
+
+        // 전달인자가 하나일 때 만
+        // 전달인자의 괄호를 생략할 수 있다.
+        
+        let test2 = (a) => {
+        console.log(a,b)
+        return a;
+        }                                       // 둘이 같은거 test2,test3
+
+         let test3 = a => {console.log(a) 
+                return a;}
+
+        // 전달인자가 없을 때 () 생략 불가능
+        let test4 = () => {    
+        }
+
+        let test5 = (a, b) => {
+                return a + b;
+        }
+        // 실행문 안의 내용이 return문 "만" 있는 경우
+        // return과 {} 생략 가능.
+        // 이럴 경우 오히려 return을 적으면 오류가 뜬다.
+        let test6 = (a,b) => a+b;
+
+        let test7 = a => a*3;
+        test7(9);
+        console.log(test7(9));
+
+        
+
+
+
+
+        
+        </script>
+        <body>
+
+        </body>
+        </html>

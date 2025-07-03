@@ -18,7 +18,11 @@ public class CarExam {
 			System.out.println("출발!");
 			car.run();
 		}
-				
+		
+		Car2 c2 = new Car2();
+		c2.setGas(3);
+		c2.run();
+		
 	}
 
 }

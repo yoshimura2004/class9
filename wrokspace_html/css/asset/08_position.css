@@ -1,0 +1,132 @@
+        body{
+        height: 200vh;
+        }
+
+        div {
+        border: 1px solid black;
+        }
+
+        .parent {
+        width: 100px;
+        background-color: green;
+        color:whitesmoke;
+        margin: 20px;
+        }
+
+        .child {
+        width: 90px;
+        background-color: rgba(0,0,15, 0.3);
+        }
+
+        .relative {
+        /* 원래 위치를 기준으로 이동한는 것이 relative
+        top, left, right, bottom +- 전부 가능
+        운래 내가 가지고 있던 공간이 유지된다.
+        margin과 다른 점은 
+        겹칠 수 있게 하는 기술*/
+        position: relative;
+        /* top: 10px; */
+        /* left: 50% */
+        }
+
+        .absolute {
+        /*부모 중 relative(없으면 body) 기준으로
+        이동, 원래 내 공간은 사라진다.*/
+        position: absolute;
+        top:0;
+        /* left:-100000px; */
+        }
+
+        .absolute-bottom {
+        position: absolute;
+        bottom:10px;
+        right: 10px;
+        }
+
+        .fixed {
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        position: fixed;
+        bottom:10px;
+        right: 10px;
+        }
+
+        /* .sticky {
+        position: sticky;
+        top: 350px;
+        }
+        */
+
+        .rel {
+        position: relative;
+        }
+        .rel:hover{
+        z-index: 999;
+        }
+        .z1 {
+        background-color: aqua;
+        top: 5px;
+        left: 20px;
+        z-index: 2;
+        }
+        .z2 {
+        background-color: blueviolet;
+        top: -10px;
+        left: -20px;
+        z-index: 1;
+        }
+        .z3 {
+        background-color: rgb(228, 149, 31);
+        top: -25px;
+        left: 50px;
+        z-index: 3;
+        }
+
+        ul.main {
+        background-color: yellowgreen;
+        }
+
+        ul.main + ul {
+        background-color: rgba(0,0,15, 0.3);
+        position: relative;
+        top: -17px;
+        left: 5px;
+        display: none;
+        }
+        ul.main:hover +ul {
+        display:block;
+        }
+        ul.main + ul:hover {
+        display:block;
+        }
+
+        .c1 {
+            position: absolute;
+            top: 10px;
+            left:200px;
+        }
+        .p1 {
+            position:relative;
+        }
+        
+        .p2 {
+        margin-top: 50px;
+        width: 200px;
+        height: 200px;  
+        position: relative;
+        }
+
+        .c2 {
+        width: 100px;
+        height: 100px;  
+
+        position: absolute;
+     /* calc(100px/2) */
+        top: 50px; 
+        left: 50px;
+        }
+
+
+        

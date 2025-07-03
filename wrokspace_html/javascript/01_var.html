@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    // java랑 똑같음
+    console.log("Hello World");
+
+    //변수 선언 방법 1
+    var a = 10;
+    console.log("a : " + a);
+
+    // 변수 선언 방법 2
+    b = 20;
+    console.log("b : " + b);
+    
+    // 변수 선언 방법 3
+    let c = 30;
+    console.log("c : " + c);
+
+    // 변수 선언 방법 4
+    // java의 final 개념
+    const d = 40;
+    console.log("d : " + d);
+    // d = 50;
+    // console.log("d : " + d)
+    //let 과 const를 주로 쓸 것이다.
+    // console.log(e);
+    
+    // var는 재선언이 가능하다.
+    var a = 20;
+    console.log("a: " + a);
+    b = 30;
+    c = 40;
+    // let과 const 는 재선언이 불가능하다.
+    // let c =30;
+    // const d = 50;
+
+    c = "문자";
+    console.log("c:"+c);
+    console.log(typeof c)
+    c = 1;
+    console.log(typeof c)
+
+    let f = 1;
+    let g = "1";
+    console.log(f == g);   // 값의 비교    
+    console.log(f === g);  // 값+타입까지 비교
+
+    let h;
+    console.log(h);
+
+    console.log(1.5+2);
+    console.log(g+2);
+    console.log(g*2); // 놀랍게도 연산이 가능하다.
+    /*
+    String a = "1";
+    int b = (int)a;
+    b = Integer.parseInt(a)
+    parseInt는 문자를 숫자로 바꿔준다.
+    */
+    console.log(Number(g) + 2)
+    console.log(parseInt(8.5+2));
+    h = "이것";
+    console.log(h*2); // NaN : Not a Number
+    // console.log((h*2) == NaN)
+    console.log(isNaN(h*2)) //NaN인가 아닌가?
+
+    console.log(5/0); //잘 안쓰니까 신경쓰지 마셈
+    console.log(isFinite(5/0)); // 무한이 아닌가?
+    
+    console.log("이전");
+    alert("Luv\nMj");
+    console.log("이후");
+        // +보단 , 사용을 지향하자.
+    const result1 = confirm("진짜에요?");
+    console.log("result1:" , result1);
+    
+    const result2 = prompt("비밀번호를 입력하세요"); //취소 시 null
+    console.log("result2:" , result2);
+
+    console.log("입력한 글씨는", result2 , "입니다");
+    console.log(`입력한 글씨는 ${result2} 입니다`);
+    // console.error("error!"); 강제로 erropr을 발생시키는 코드
+
+    // int a , b;
+    // int c = 10, d = 20;
+    // let i, j; java와 js의 방식과 동일하다.    
+        
+
+</script>
+</head>
+<body>
+    
+</body>
+</html>

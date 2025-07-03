@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Google Clone</title>
+  <style>
+    /* 구글 메인화면 만들기. 
+    1. 메인 구글 로고
+    2. search bar
+    3. bookmark 바로가기
+    4. 상단 바 Gmail 이미지 그림
+    5. 하단 크롬 맞춤설정 */
+    body {
+      margin: 0;
+      font-family: Arial;
+      background-color: white;
+    }
+
+    /* 1. 구글 로고 */
+    .logo {
+      display: flex;
+      justify-content: center;
+      margin-top: 150px;
+    }
+
+    .logo img {
+      width: 270px;
+    }
+
+    /* 2. 검색창 */
+    .searchbar-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .searchbar {
+      width: 600px;
+      padding: 14px 20px;
+      font-size: 16px;
+      border: 1px solid  rgb(214, 214, 214);
+      border-radius: 24px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      
+    }
+
+    .searchbar:focus {
+      box-shadow: 0 0 5px rgb(255, 255, 255);
+    }
+
+    /* 3. 바로가기 북마크 */
+    .bookmark {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 40px;
+    }
+   
+    .bookmark-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 70px;
+      text-align: center;
+      color: black;
+      font-size: 13px;
+    }
+
+    .bookmark-item img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-bottom: 6px;
+    }
+
+    /* 4. 상단 바 */
+    .upbar {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 14px;
+    }
+
+    /* 5. 하단 바 */
+    .downbar {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 바 -->
+  <div class="upbar">
+    Gmail &nbsp; 이미지 &nbsp; 
+  </div>
+
+  <!-- 구글 로고 -->
+  <div class="logo">
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google 로고">
+  </div>
+
+  <!-- 검색창 -->
+  <div class="searchbar-container">
+    <input class="searchbar" type="text" placeholder="Google 검색 또는 URL 입력">
+  </div>
+
+  <!-- 북마크 -->
+  <div class="bookmark">
+    <div class="bookmark-item">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAmVBMVEX///8AvxgAvQDY9eJP2ISN4KIAvgQAwSPb+u7N9Nyq784AwR259NuW3JkAvhH8//9W0nIAwyslyUrz/vrB8tay5rhq25CG35276sLN9+VZ1X0AxDXr+/NHzmN725TB7s2B4qUgxj+h57Y0ylOx68Wq5LJ757KG5rK99d/i+e6n6b1m1oFr2YzJ89uY5bAzzV43xkNQ1Xlg0nJ9EnlhAAADxUlEQVR4nO3da1faQBCH8d1BA166GLFC5WaqvaACrd//w5WcQ6lo2GQWLTNz/s/7LPwOgTUx2TiHEEIIIYQQQgghhBBCqHHdq8/XR+LqD768k+/kJiOhDfujd/CNiYIXWiCa9PbzdftEh2bEo3y6F3As3OfLz/F2D2AhH7iKrpOFFyqAK+LXROCxEqAPWSsJ2MrE/oa+LrtLEmrZR8voPgHYUQT0oUgQTjQJPc35wlzNt7CMJmygqp10tZvyf2umyoRD9t/g35QJfYcrVDPdr+NP+hBKC0II5QchhPKDEEL5QQih/CCEUH4QQig/CCGUH4QQyg9CCOUH4X7CEL+CMLZp+pb/Uxja56eRbiMj0ffYlj8YxI8V5vGhIhfm0M/YhidihO34ULP2zss66NyE0D3sHMuKcPd+akbY27WfmhG6+x2j2RG6x+rhDAl7w8r91JDQXVWOZ0nonqoGNCXsFhX7qSmhm1fce2NLWHXVsTFhxX5qTFhx3bE14dtBzQnd8tWo9oStsP1VtCd0i+1hDQpf7acWhaOt+8UsCrdPaZgUbp3SsCkcvTilYVP48pSGUaG72YxtVdjb3PlnVfjvxjizws2pN7vCv4eKdoVuTtaF61NvloXuMrMunJd/gpsWuj5ZF7oisy7sUDAuXL2GdaFb2hBGFuOa2RB+irz24tSEMLYoR3Q1CzVCOua+uDphyvI4uoRh2DUu9PRoXZi2FpcqYThLWYZTk9DT0rrQp0wZuoSe+GsbKhOGgr1arDKhpyfrQk/c9XDVCQMx91N1Qk9j60JPC+tC5nK4CoU+KzhHGRqFvClDpZB1lKFTGPLmRxk6hZ4urAsZK6hrFQaaGRf67LLhlKFW2Hhpar1CT1fWhSFvdJShWNhwytAsbDZlqBYG32DKUC30dFc/ZegWeupbF3o6sS4Mw7opQ7uw/n9u6oWeHqwL66YMOcL46i27hXXPaRIj9P4sVvR9Rbc8YzzM54OFIVb6lpynFWElLAjlByGE8oMQQvlBCKH8IIRQfhBCKD8IIZQfhBDKD0II5QchhPLjCxfmhQNdwpB3uMLqNdTFFn5xga6bcf4De/DoN1sYezqMwGjAF041CUNg36C6qvp5DTLj359atuu5IgILWcrt/s6N1RCZ9zVu6nCu2Dlk9JwGLK+6UkGky5SfmTUxyw799uujprfgVBML6d/FQM/pn2BZ74kk76qB2jXXqDao9ZitkBJbva/8eL8PcN1ocHRXtKWVF8tJs9unmtXrSGu2z+8LQgghhBBCCCGEEEIIvekPP5Cn33NBThsAAAAASUVORK5CYII=" alt="Naver">
+      <div>NAVER</div>
+    </div>
+    <div class="bookmark-item">
+      <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+      <div>GitHub</div>
+    </div>
+    <div class="bookmark-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion">
+      <div>Notion</div>
+    </div>
+    <div class="bookmark-item">
+      <img src="https://img.freepik.com/premium-vector/red-youtube-logo-social-media-logo_197792-1803.jpg?w=360" alt="dev.mminsu">
+      <div>dev.mminsu</div>
+    </div>
+    <div class="bookmark-item">
+      <img src="https://img.freepik.com/premium-vector/red-youtube-logo-social-media-logo_197792-1803.jpg?w=360" alt="YouTube">
+      <div>YouTube</div>
+    </div>
+    <div class="bookmark-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="RDBMS">
+      <div>RDBMS</div>
+    </div>
+    <div class="bookmark-item">
+      <img src="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png" alt="웹 스토어">
+      <div>웹 스토어</div>
+    </div>
+    <div class="bookmark-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="추가">
+      <div>바로가기 추가</div>
+    </div>
+  </div>
+
+  <!-- 하단 바 -->
+  <div class="downbar">
+    Chrome 맞춤설정 ⚙
+  </div>
+
+</body>
+</html>

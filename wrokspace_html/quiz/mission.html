@@ -1,0 +1,337 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Music App</title>
+    <!-- youtube music.
+    1.상단바(검색창, 로고) 2.하단 바  3.사이드 바 4.메인화면 다시듣기 빠른 선곡 플리.-->
+    <style>
+    body {
+    margin: 0;
+    font-family: Arial;
+    background-color: black;
+    color: white;
+    overflow: hidden; 
+    }
+
+    .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(122, 118, 118, 0.5);
+    z-index: 100;
+    }
+
+    .logo {
+    position: absolute;
+    left: 20px;
+    top: 18px;
+    color: red;
+    font-weight: bold;
+    }
+
+    .searchbar {
+    position: absolute;
+    left: 200px;
+    top: 15px;
+    width: 450px;
+    padding: 8px;
+    border-radius: 2px;
+    height: 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    }
+
+    .menu {
+    position: absolute;
+    right: 20px;
+    top: 18px;
+    font-size: 20px;
+    }
+
+    .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 200px;
+    height: calc(100% - 60px);
+    background-color: rgb(71, 66, 66);
+    padding: 20px;
+    box-sizing: border-box;
+
+    }
+
+    .sidebar div {
+    margin-bottom: 20px;
+    cursor: pointer;
+    }
+
+    .sidebar2 {
+    border-radius: 15px;
+    border: 3px solid black;
+    background-color: black;
+    width: 150px;
+    padding-left: 15px;
+    text-align: justify;
+    }
+
+    /* 고정된 상단 콘텐츠 */
+    .top-panel {
+    position: fixed;
+    top: 60px;
+    left: 200px;
+    width: calc(100% - 200px);
+    height: 300px;
+    overflow-y: auto;
+    background-color: black;
+    z-index: 50;
+    padding: 20px;
+    box-sizing: border-box;
+    }
+
+    .container-tags {
+    margin-bottom: 20px;
+    }
+
+    .tag {
+    display: inline-block;
+    background-color: rgba(122, 118, 118, 0.5);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-right: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    }
+
+    .tag:hover {
+    background-color: rgba(150, 150, 150, 0.7);
+    }
+
+    .music-row {
+    white-space: nowrap;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    }
+
+    .music-box {
+    display: inline-block;
+    width: 150px;
+    margin-right: 20px;
+    vertical-align: top;
+    }
+
+    .music-box img {
+    width: 100%;
+    border-radius: 8px;
+    }
+
+    .music-title {
+    font-weight: bold;
+    margin-top: 5px;
+    color: white;
+    }
+
+    .music-artist {
+    font-size: 12px;
+    color: gray;
+    }
+
+    .quick-list {
+    display: inline;
+    flex-direction: column;
+
+    }
+
+    .quick-item {
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 8px;
+    }
+
+    .quick-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    margin-right: 10px;
+    }
+
+    .quick-info {
+    display: flex;
+    flex-direction: column;
+    }
+
+    .quick-title {
+    font-weight: bold;
+    color: white;
+    }
+
+    .quick-artist {
+    font-size: 12px;
+    color: gray;
+    }
+
+    .main {
+    position: absolute;
+    overflow: auto;
+    top: 360px; 
+    left: 200px;
+    width: calc(100% - 200px);
+    height: calc(100% - 360px - 60px); /* 전체 - 고정된 부분 - 플레이어 */
+
+    padding: 20px;
+    box-sizing: border-box;
+    }
+
+    .play {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(122, 118, 118, 0.5);
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 100;
+    }
+
+    .left-controls {
+    float: left;
+    }
+
+    .right-controls {
+    float: right;
+    }
+
+    .song-info {
+    position: absolute;
+    right: 35%;
+    bottom: 35%;
+    }
+    </style>
+    </head>
+
+    <body>
+
+    <!-- Header -->
+    <div class="header">
+    <div class="logo">≡ ▶ Music</div>
+    <input class="searchbar" type="text" placeholder="노래, 앨범, 아티스트 검색">
+    <div class="menu">≡</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+    <div>홈</div>
+    <div>둘러보기</div>
+    <div>보관함</div>
+    <div class="sidebar2">+ 새 재생목록</div>
+    <div>좋아요 표시한 음악<br>자동 재생목록</div>
+    <div>gs<br>김경식</div>
+    <div>k pop<br>김경식</div>
+    <div>나중에 감상할 에피소드<br>자동 재생목록</div>
+    </div>
+
+    <!-- 고정된 콘텐츠 상단 패널 -->
+    <div class="top-panel">
+    <div class="container-tags">
+    <div class="tag">팟캐스트</div>
+    <div class="tag">운동</div>
+    <div class="tag">행복한 기분</div>
+    <div class="tag">출퇴근길</div>
+    <div class="tag">휴식</div>
+    <div class="tag">에너지 충전</div>
+    <div class="tag">잠잘 때</div>
+    <div class="tag">파티</div>
+    <div class="tag">집중</div>
+    <div class="tag">로맨스</div>
+    <div class="tag">슬픔</div>
+    </div>
+
+    <h2>다시 듣기</h2>
+    <div class="music-row">
+    <div class="music-box">
+    <img src="https://i.pinimg.com/736x/3f/fb/77/3ffb7721e10a7a948505af7687faf8d1.jpg">
+    <div class="music-title">Love me, Love you</div>
+    <div class="music-artist">Mrs. GREEN APPLE</div>
+    </div>
+    <div class="music-box">
+    <img src="https://i.pinimg.com/736x/3f/fb/77/3ffb7721e10a7a948505af7687faf8d1.jpg">
+    <div class="music-title">Love me, Love you</div>
+    <div class="music-artist">Mrs. GREEN APPLE</div>
+    </div>
+    <div class="music-box">
+    <img src="https://i.pinimg.com/736x/3f/fb/77/3ffb7721e10a7a948505af7687faf8d1.jpg">
+    <div class="music-title">Love me, Love you</div>
+    <div class="music-artist">Mrs. GREEN APPLE</div>
+    </div>
+    <div class="music-box">
+    <img src="https://i.pinimg.com/736x/3f/fb/77/3ffb7721e10a7a948505af7687faf8d1.jpg">
+    <div class="music-title">Love me, Love you</div>
+    <div class="music-artist">Mrs. GREEN APPLE</div>
+    </div>
+    <div class="music-box">
+    <img src="https://i.pinimg.com/736x/3f/fb/77/3ffb7721e10a7a948505af7687faf8d1.jpg">
+    <div class="music-title">Love me, Love you</div>
+    <div class="music-artist">Mrs. GREEN APPLE</div>
+    </div>
+    <div class="music-box">
+    <img src="https://i.pinimg.com/736x/3f/fb/77/3ffb7721e10a7a948505af7687faf8d1.jpg">
+    <div class="music-title">Love me, Love you</div>
+    <div class="music-artist">Mrs. GREEN APPLE</div>
+    </div>
+    </div>
+
+    <h2>빠른 선곡</h2>
+    <div class="quick-list">
+    <div class="quick-item">
+    <img src="https://i.pinimg.com/736x/3f/fb/77/3ffb7721e10a7a948505af7687faf8d1.jpg">
+    <div class="quick-info">
+    <div class="quick-title">FAKE LAND</div>
+    <div class="quick-artist">FAKE TYPE</div>
+    </div>
+    </div>
+    <div class="quick-item">
+    <img src="https://i.pinimg.com/736x/3f/fb/77/3ffb7721e10a7a948505af7687faf8d1.jpg">
+    <div class="quick-info">
+    <div class="quick-title">FAKE LAND</div>
+    <div class="quick-artist">FAKE TYPE</div>
+    </div>
+    </div>
+    </div>
+    <div class="quick-item">
+    <img src="https://i.pinimg.com/736x/3f/fb/77/3ffb7721e10a7a948505af7687faf8d1.jpg">
+    <div class="quick-info">
+    <div class="quick-title">FAKE LAND</div>
+    <div class="quick-artist">FAKE TYPE</div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main">
+    <h2>추천 플레이리스트</h2>
+    <p>이곳에 추천 음악 콘텐츠가 스크롤됩니다.</p>
+    <p>스크롤 테스트용 내용 추가...</p>
+    <p>스크롤 테스트용 내용 추가...</p>
+    <p>스크롤 테스트용 내용 추가...</p>
+    <p>스크롤 테스트용 내용 추가...</p>
+    <p>스크롤 테스트용 내용 추가...</p>
+    </div>
+
+    <!-- 하단 재생 바 -->
+    <div class="play">
+    <div class="song-info">🎵 Love Me, Love You - Mrs. GREEN APPLE 👎 👍 </div>
+    <div class="left-controls">👈 ▶ 👉</div>
+    <div class="right-controls">🎧 ⌇ ⌥ ▲</div>
+    </div>
+
+    </body>
+    </html>

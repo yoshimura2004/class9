@@ -1,0 +1,158 @@
+body{
+    border: 1px solid black;
+
+}
+
+.first{
+    border: 1px solid red;
+    /* margin-top: 50px;
+    margin-right: 40px;
+    margin-bottom: 30px;
+    margin-left: 20px; */
+    /* margin 축약형 */
+    /* 4개 일 때 : top right bottom left순이다. */
+    margin: 50px 40px 30px 20px;
+    /* 3개 일 때 : top 좌우 바텀;*/
+    margin: 50px 30px 20px;
+    /* 2개 일 때 : 위 아래, 좌 우를 의미*/
+    margin: 50px 50px;
+    /* 1개 일 때 : 위 아래 좌 우 모두 같은 정사각형*/
+    margin: 20px;
+
+    border-top-width: 10px;
+    border-top-style: dotted;
+    border-top-color: blue;
+   
+    border-right: 3px dashed green;
+
+    border: 6px solid red;
+
+    border-radius: 10px;
+
+    padding-top: 20px;
+    padding-right: 10px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    /* padding도 margin처럼 4방향 축약으로 사용 가능*/
+     padding: 30px;
+
+    /* width, height는 내용물(컨텐츠의 너비와 높이)*/
+    width: 50vw;
+     height: 200px;
+
+     /* padding + contents 까지만 칠해짐*/
+    background-color: violet;
+}
+
+.second {
+    /*너비와 높이는 padding+border */
+    box-sizing: border-box;
+/* 나머지는.first를 복사 해왔다.*/
+
+    border: 1px solid red;
+    /* margin-top: 50px;
+    margin-right: 40px;
+    margin-bottom: 30px;
+    margin-left: 20px; */
+    /* margin 축약형 */
+    /* 4개 일 때 : top right bottom left순이다. */
+    margin: 50px 40px 30px 20px;
+    /* 3개 일 때 : top 좌우 바텀;*/
+    margin: 50px 30px 20px;
+    /* 2개 일 때 : 위 아래, 좌 우를 의미*/
+    margin: 50px 50px;
+    /* 1개 일 때 : 위 아래 좌 우 모두 같은 정사각형*/
+    margin: 20px;
+
+    border-top-width: 10px;
+    border-top-style: dotted;
+    border-top-color: blue;
+   
+    border-right: 3px dashed green;
+
+    border: 6px solid red;
+
+    border-radius: 10px;
+
+    padding-top: 20px;
+    padding-right: 10px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    /* padding도 margin처럼 4방향 축약으로 사용 가능*/
+     padding: 30px;
+
+    /* width, height는 내용물(컨텐츠의 너비와 높이)*/
+    width: 50vw;
+     height: 200px;
+     
+     /* padding + contents 까지만 칠해짐*/
+    background-color: violet;
+}
+
+.profile img{
+    border: 1px solid black;
+    width: 640px;
+    height: 427px;
+    border-radius: 20%;
+    margin-left: 150px;
+}
+
+.chat-left {
+    border: 1px solid black;
+    background-color: yellowgreen;
+    width: 100px;
+    text-align:center;
+    padding: 5px;
+    margin: 30px;
+
+    border-radius: 0 10px 10px 10px;
+}
+
+.chat-right{
+     border: 1px solid black;
+    background-color: yellowgreen;
+    width: 100px;
+    text-align:center;
+    padding: 5px;
+    margin: 100px;
+
+    border-radius: 10px 0 10px 10px;
+}
+.third{
+    border: 1px solid red;
+    width: 70%;
+
+    min-width: 500px;
+    max-width: 500px;
+}
+
+/*
+마진 중첩
+세로 방향으로 붙어있을 때 또는 부모와 첫번 째 자식 간에
+ margin이 더해 지지 않고, 큰 값 하나로 
+적용되는 현상.*/
+/* 해결 법 
+ border, padding 등 적용
+ 컨텐츠 적기 <br이 여기에 포함>
+ 부모에 overflow: hidden 주기 - 부모와 첫번 째 자식의 중첩 해소
+ */
+#div1, #div2, #div3{
+    /* border: 1px solid red; */
+    /* padding: 1px; */
+     overflow: hidden;
+}
+#div2, #div3{
+    margin: 30px;
+    /* margin-top: -1px; */
+}
+#div3 {
+    margin: 50px;
+}
+#div1 {
+    margin: 30px;
+}
+#auto {
+    border: 1px solid red;
+    width: 100px;
+    margin: 0 auto;
+}

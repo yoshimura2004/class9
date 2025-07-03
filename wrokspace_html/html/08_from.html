@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        text(기본값) :  <input type = "text"> <br>
+        text(value) :  <input type = "text" value ="값"> <br>
+        text(placeholder) :  <input type = "text" placeholder ="자리요"> <br>
+        text(readonly) :  <input type = "text" value ="suz" readonly = "true"> <br>
+        text(readonly) :  <input type = "text" value ="suz" disabled = "true"> <br>
+        <br>
+
+        password : <input type = "password" name = "pw" placeholder ="비밀번호를 입력하시오" ><br>
+        <br>
+        radio :
+        <input type = "radio" name = "gender" value = "male"> 
+        남자
+        <input type = "radio" name = "gender" value = "female"> 여자
+        <input type = "radio" name = "gender" value = "unknwon" checked = "true"> 그 외
+        <!--둘 이상 체크되있는 경우 마지막 것이 ceckd!-->
+        <br>
+        <input type = "radio" name = "meet"> 참석
+        <input type = "radio" name = "meet"> 미참석
+        <br>
+    submit: <input type = "submit" value = "렛츠고">
+    <br>
+    checkbox:
+    <input type = "checkbox" value = "1"> 생크림
+    <input type = "checkbox" value = "2"> 초코칩
+    <input type = "checkbox" value = "3" disabled = "true"> 시럽
+    <input type = "checkbox" value = "4"> 샷 추가
+
+    <input type = "checkbox" value = "5" id = "pearl"> <label for = "pearl">
+        펄추가 (label 추가버전)
+    </label>
+    <label for = "corn">
+        <input type = "checkbox" value ="6" id = "corn"> 팝콘추가
+    </label>
+    <br> 
+    <!--체크박스는 다중 radio는 단일-->
+    file : <input type = "file">
+    <br>
+    reset : <input type = "reset">
+    <br>
+    input button : <input type = "button" value = "이거 버튼임">
+    <br>
+    button: <button type ="button">버른</button>
+    <br>
+    <br>
+    <br>
+        hidden : <input type = "hidden" name = "secret" value = "1234">
+    </form>
+    <br>
+    <br>
+    <br>
+    date : <input type = "date" > <br>
+    color :<input type = "color"> <br>
+    number :<input type = "number"> <br>
+    range : <input
+             type
+              = "range"
+               min = "10"
+             max = "100"
+             step = "10"> <br>
+<fieldset>
+    <legend> 제목 </legend>
+    글씨들
+</fieldset>
+<br>
+
+required, autocomplete : <input type = "text" requried = "requried" cutocomplete = "off"  ><br>
+    <br>
+ <textarea rows = "10" cols = "100">
+        1줄
+2줄
+    </textarea>
+    <br>
+    <select name = "lunch"> 
+        <option value = "한식"> 한식</option>
+        <option value = "2"> 양식 </option>
+        <option value = "3" selected = "selected"> 중식</option>
+     
+       
+    </select>
+    <!--이중 form문은 안됨-->
+    <!--
+        form의 method의 종류 : get, post
+        method의 기본값은 : get
+
+        action : 전송할 주소 
+        action의 기본값 : 지금 내 주소
+    -->
+    
+        <form method = "get" action ="https://search.naver.com/search.naver">
+        <input type = "text" name = "query" >
+        <input type = "submit" value = "네이버 검색">
+    </form>
+
+    <form method = "get" action ="https://search.google.com/search.google">
+        <input type = "text" name = "query" >
+        <input type = "submit" value = "구글 검색">
+    </form>
+
+<form method = "get">
+    <input type = "text" name = "qyar" value = "1234">
+        <input type = "submit" value = "get 연습">
+    </form>
+
+  
+        <!-- <form method = "post">
+        <input type = "text" name = "qyar" value = "1234">
+        <input type = "submit" value = "post 연습">
+    </form> -->
+
+        <!-- 네이버 로그인 화면 만들기
+            상자 2개 
+            로그인 상자 
+            로그인 상태 유지 상자 -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
