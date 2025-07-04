@@ -27,14 +27,59 @@
         console.log(str)       
         console.log(str3)       
         
+        // 시작, 끝 바로 앞
         let str4 = str.substring(2,8);
         console.log(str)       
         console.log(str4)  
 
-        
+        // 시작, 몇 개
         let str5 = str.substr(2,8);
         console.log(str)       
         console.log(str5) 
+
+        // 1번 어떤 이메일이라도 id를 출력해야함.
+        let mail = "kksik0844@naver.com";
+        console.log("mail.length:", mail.length);
+        let mail2 = mail.indexOf("@");
+        let mail21 = mail.substring(0,mail2);
+        console.log(mail21);
+        let mail3 = mail.replace(/@naver.com/g, "")
+        console.log(mail3);
+        //@ 나누는 방법: split 선생님 풀이
+        let mails = mail.split("@")
+        console.log(mails[0]);
+
+        // 2번
+        // 메일 주소 앞 두자리를 제외한 id는 *처리
+        //  kksik0844@naver.com    >> kkㅇㅇㅇㅇ0844@naver.com
+        // 앞의 두개 남기고 @ 까지만 ㅇ표시 
+        function maskEmail(email) {
+        const [id, domain] = email.split("@");
+        const visible = id.slice(0, 2);
+        let masked = "";
+        for (let i = 2; i < id.length; i++) {
+        masked += "*";
+        }
+        return visible + masked + "@" + domain;
+        }
+        console.log(maskEmail("kksik0844@naver.com")); 
+
+        //3번 
+        // 인터넷 주소 중 2차 도메인을 가져오세요
+        // ex) comic.naver.com 에서 naver을 출력하세요!
+        //  .기준으로 앞 뒤를 잘라준다. xxxx. xxxxx. xxxxx
+        function domain(url) {
+        let parts = url.split(".");
+        if (parts.length >= 3) {
+        return parts[parts.length - 2];
+        } 
+        }
+        console.log(domain("co21312321mic.naver.c213123213om"));  
+
+
+    
+
+
     </script>
 </head>
 <body>
