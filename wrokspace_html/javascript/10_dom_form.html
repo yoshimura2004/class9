@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+</head>
+<body>
+    
+  <input type="text" id="id" value="미리적은글"><br>
+  <input type="password" id="pw"><br>
+  <input type="date" id="date"><br>
+
+  <input type="radio" name="ai" value="1"> chatGPT
+  <input type="radio" name="ai" value="2"> gemini
+  <input type="radio" name="ai" value="3"> bing
+  <input type="radio" name="ai" value="4" checked="checked"> perplexity <br>
+
+  <input type="checkbox" class="room" value="에어컨"> 에어컨
+  <input type="checkbox" class="room" value="식세기"> 식세기
+  <input type="checkbox" class="room" value="로청"> 로청 <br>
+
+  <select id = "select">
+    <option value = "1">javascript</option>
+    <option value = "2">java</option>
+    <option value = "3" selected = "selected">css</option>
+    <option value = "4">sql</option>
+  </select>
+<br>
+
+  <textarea id = "textarea">chogigab</textarea>
+  <div id ="view"></div>
+  <script>
+    setTimeout(function () {
+      const text = document.querySelector("#id");
+      console.log("text:", text.value);
+      text.value = 1234;
+
+      const pw = document.querySelector("#pw");
+      console.log("pw:", pw.value);
+
+      const date = document.querySelector("#date");
+      console.log("date:", date.value);
+      date.value = "1999-12-13";
+      date.value = new Date().toISOString().split("T")[0];
+
+      let radio = document.querySelector('[name="ai"]:checked');
+      console.log("선택된 라디오:", radio.value);
+
+      let radios = document.querySelectorAll('[name="ai"]');
+      radios[1].checked = true; // gemini 선택됨
+
+      let checkboxs = document.querySelectorAll(".room");
+      for (let i = 0; i < checkboxs.length; i++) {
+        console.log(checkboxs[i].value, checkboxs[i].checked);
+        if (checkboxs[i].checked) {
+          console.log("선택된 체크박스:", checkboxs[i].value);
+        }
+      }
+
+      checkboxs[1].checked = true; // 식세기 체크됨
+
+      let checkboxs2 = document.querySelectorAll(".room:checked");
+      for (let i = 0; i < checkboxs2.length; i++) {
+        console.log("체크된 항목:", checkboxs2[i].value, checkboxs2[i].checked);
+      }
+
+      const select = document.querySelector("#select")
+      console.log("select :", select.value)
+      
+      const option  = document.querySelector("#select option:checked");
+      console.log(option, option.innerText)
+
+      select.value = 2;
+
+      const textarea = document.querySelector("#textarea")
+      console.log("textarea:",textarea.value)
+    //   textarea.value = "changegab\n 다음줄";
+
+      const view = document.querySelector("#view")
+    //   view.innerText = textarea.value.replace("\n","<br>")
+      view.innerHTML = textarea.value.replace(/\n/g, "<br>")
+    }, 1000 * 4);
+  </script>
+</body>
+</html>

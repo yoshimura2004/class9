@@ -1,0 +1,365 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        </head>
+        <body>
+        
+        <style>
+        /* 3번 */
+        #dilvery {
+        margin: 15px;
+        padding: 15px;
+        font-size: 25px;
+        }
+        .food {
+        margin: 5px;
+        font-size: 20px;
+        color: rgba(2,2,2,0.5);
+        width:50px;
+        }
+        /* 4번 */
+        #main {
+        width: 300px;
+        }
+        #zoom{
+        display: none;
+        position: absolute;
+        left: 320px;
+        top: 500px;
+        width: 500px;
+        height: 300px;
+        background-image: url('https://blog.kakaocdn.net/dn/donSRN/btrNmyPXHa2/wVmwlUdFTk5pwXiPCQm8kk/img.jpg');   
+        background-size: 1200px;
+        }
+        /* 5번 */
+        .switch{
+        margin: 10px;
+        padding: 5px;
+        width: 100px;
+        border-radius: 30px;
+        background-color: rgb(236, 225, 225,0.3);
+        border-color: rgb(205, 197, 182);
+        }
+        .chk  {
+        width: 15px;
+        height: 15px;
+        margin: 10px;
+        }
+        .chk_all{
+        width: 20px;
+        height: 20px;
+        margin: 15px;
+        }
+        .chksize{
+        font-size: 20px;
+        }
+        .fontsize{
+        font-size: 30px;
+        font-style: oblique;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 600;
+        color:rgba(227, 15, 47, 0.3);
+        }
+        body{
+        background-color: rgba(255, 200, 200, 0.3);
+        }
+
+        </style>
+        <!-- 1번 신청 버튼 누르면 input의 글시가 아래에 쌓인다.
+        추가로 초기화 버튼이 있으면 좋을 것 같음. (희망사항) -->
+        <div>
+        <input type="text" id = "apply" placeholder="입력창입니다.">
+        <button onclick="btnClick()">신청</button>
+        <button onclick="btnClick2()">초기화</button>
+        </div>
+        <div id="console">신청 목록</div> <br>
+        <hr>
+        <!--\\\\\\\\\\\\\\\\\\////////// 1번 완료////////////////\\\\\\\\\\\\\\\\\\\\\\\\//////// -->
+
+        <!-- 2번 주문정보와 '같음 버튼'을 누르면 주문자의 정보가 배송정보로 복사되어 출력됨 -->
+        <div> <label id = "dilvery">주문정보❤</label>  <button onclick="btn2()">초기화</button>
+        <div>고객명</div>
+        <input type="text" class = "enter" placeholder="성함을 입력해주세요.">
+        <button >확인</button>
+        <div>배송지</div>
+        <input type="text" class = "enter" placeholder="배송지를 입력해주세요.">
+        <button >확인</button>
+        <div>고객전화번호</div>
+        <input type="text" class = "enter" placeholder="전화번호를 입력해 주세요.">
+        <button >확인</button>
+        </div>
+
+        <div><label id = "dilvery">배송정보❤</label> <br>
+        <button onclick="btn()">위의 정보와 같음</button> <br>
+        <div id = "result"> 결과 창</div>
+        </div>
+        <hr>
+        <!--/////////////////////////////// 2번 완료 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+        <!-- 3번  메뉴가 여러 개 일 때 선택한 메뉴만 특이하게 보이게. 예를 들어 밑줄이 쳐지든가,
+        글씨가 굵어지는 것. 가능하면 둘 다 해볼 것.
+      -->
+      <div> <h1>Menu</h1>
+        <div class = "food">Beef</div>
+        <div class = "food">Pork</div>
+        <div class = "food">Chicken</div>
+        <div class = "food">lamb</div>
+      </div> <br> 
+             <hr>
+      <!--/////////////////////////////// 3번 완료 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+      <!-- 4번 썸네일 클릭 또는 hover(mouseover) 시 큰 그림 변경 및 유지 
+      계획: main그림에 마우스를 대면 옆에 안보이던 main과 동일한 sub그림이 나오며,
+      main그림에 마우스를 대면, sub그림으로 확대된 일정 부분을 보여준다.
+      ex) 쿠팡 상품.
+    -->
+    <div id = "screen">
+      <img
+      src="https://blog.kakaocdn.net/dn/donSRN/btrNmyPXHa2/wVmwlUdFTk5pwXiPCQm8kk/img.jpg"
+      id="main"
+      >
+      <div id="zoom"></div>
+    </div>
+    <br> 
+    <hr>
+    <!--/////////////////////////////// 4번 완료 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+     <!-- 5번 pizza주문 시스템 만들기. 주문/주문 정보 size Large, 옥수수, 버섯, 씬도우
+    합계 3억 -->
+    <div>
+        <h1>humanPizza</h1>
+        <div> <h2>Size</h2> 
+          <input type = "radio" class = "rad" name= "size" value = "Large (30000원)" > Large
+          <input type = "radio" class = "rad" name = "size" value = "Regular (20000원)" > Regular
+          <input type = "radio" class = "rad" name = "size" value = "Mini (10000원)" checked = "true"> Mini 
+        </div> <br>
+        <label class = "fontsize"><input type = "checkbox" class ="chk_all"> 전체선택 </label><br>
+        <lavel class = "chksize">
+        <input type = "checkbox" class = "chk" value = "페페로니 (+2000원)">페페로니 
+        <input type = "checkbox" class = "chk" value = "베이컨 (+1500원)">베이컨 
+        <input type = "checkbox" class = "chk" value = "치즈 (+2000원)">치즈 
+        <input type = "checkbox" class = "chk" value = "파인애플 (+2000원)">파인애플 
+        <input type = "checkbox" class = "chk" value = "버섯 (+1000원)">버섯 
+        <input type = "checkbox" class = "chk" value = "옥수수 (+500원)">옥수수
+     
+        <div> <h2> Pizza Dough</h2>
+        <input type = "radio" class = "dough" name= "dou" value = "치즈크러스트 (+2000원)"> 치즈크러스트
+        <input type = "radio" class = "dough" name= "dou" value = "고구마크러스트 (+2000원)"> 고구마크러스트
+        <input type = "radio" class = "dough" name= "dou" value = "치즈고구마크러스트 (+3000원)"> 치즈고구마크러스트
+        <input type = "radio" class = "dough" name= "dou" value = "기본 (씬도우)" checked = "true"> 기본 (씬도우)
+        </div> 
+        </lavel>
+        <br>
+        <input type = "button" class= "switch" value = "선택 완료">
+        </div>
+        <div id = "result2"></div> 
+        <br>
+        <hr>
+        <!--///////////////////// 5번 완료 \\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+        <!-- 6번 TODO 리스트   
+         추가 버튼 클릭 : input 내용 추가
+할일 체크하면 할일글씨 취소선
+할일 삭제하면 할일 삭제
+전체선택 구현
+선택취소 구현         
+      6-1 준비물 : 검색창, 검색 버튼, 선택 완료 버튼.
+      1. 검색 창에 할 일을 검색
+      2. 밑에 할 일 들이 촤라라락 나옴.
+      3. 촤라라락 나온 할 일들에 관하여 각 Checkbox가 나옴.  
+      4. 할 일을 체크하고 선택완료를 누르면, 옆에 TOODOList 박스에
+      체크한 할 일들이 나옴.  
+      6-2 준비물 : 삭제 버튼, 전체선택 버튼.
+      TODOList 박스에 체크한 일들 옆에 선택 check box가 나옴.
+      전체 선택을 누르면 모든 할 일들의 check box가 선택됨.
+      check box에서 선택된 할 일들을 삭제 버튼을 누르면 삭제됨.
+      -->
+     <div>
+        <input type="text" id = "todoList" placeholder="입력창입니다.">
+        <button onclick="btnClick3()">검색</button>
+        <button onclick="btnClick4()">선택완료</button>
+        <button onclick="btnClick5()">초기화</button>
+        </div>
+        <div id="todoBox">신청 목록</div> <br>
+        <hr>
+        <div class = "resultBox"> TodoList </div>
+<script>
+  function btnClick() {
+    const msg = document.querySelector("#console");
+    const id = document.querySelector("#apply").value;
+    if(id == ""){
+      msg.innerHTML += `<br>뭐라도 써주세요`;
+    }else{
+      msg.innerHTML += `<br> ${id}`;
+    }
+  }
+
+  function btnClick2(){
+    const msg = document.querySelector("#console");
+    msg.innerHTML = "신청 목록";
+  }
+  // \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\1번 완료////////////////\\\\\\\\\\\\\\\
+  function btn() {
+    const msg = document.querySelector("#result");
+    const inputs = document.querySelectorAll(".enter");
+    
+    const name = inputs[0].value;
+    const address = inputs[1].value;
+    const phone = inputs[2].value;
+    msg.innerHTML = `<br>고객명: ${name}<br>배송지: ${address}<br>전화번호: ${phone}`;
+        }
+        function btn2(){
+        const inputs = document.querySelectorAll(".enter");
+        inputs.forEach(input => input.value = "");  
+        document.querySelector("#result").innerHTML = "결과 창";
+        }
+        //////////////////////////////////2번 완료\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        // 3번. 메뉴를 배열로 묶은 후, 마우스 클릭 이벤트 시, 글씨가 굵어짐.
+        const foods = document.querySelectorAll(".food");
+
+        foods.forEach(food => {
+        food.addEventListener("click", function () {
+
+        foods.forEach(food => {
+        food.style.fontWeight = "";
+        })
+        food.style.fontWeight = "bolder";
+        })
+        })
+        //////////////////////////////////////////////3번 완료\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        //4썸네일 클릭 또는 hover(mousemove) 시 큰 그림 변경 및 유지 
+        //   계획: main그림에 마우스를 대면 옆에 안보이던 main과 동일한 zoom된 그림이 나오며,
+        // main그림에 마우스를 대면, zoom 된 그림으로 확대된 일정 부분을 보여준다.
+        //  ex) 쿠팡 상품. 
+
+    const main = document.getElementById("main");
+    const zoom = document.getElementById("zoom");
+
+    main.addEventListener("mousemove", function (evt) {
+    const x = evt.offsetX;  
+    const y = evt.offsetY;  
+
+    zoom.style.display = "block";
+
+    // 마우스 위치 기준으로 확대된 배경 위치 계산
+    const zoomX = x * 3;
+    const zoomY = y * 3;
+
+    zoom.style.backgroundPosition = `-${zoomX - 100}px -${zoomY - 100}px`;
+    });  //backgroundPosition: 배경 이미지의 위치를 지정 속성 
+
+    main.addEventListener("mouseout", function () {
+    zoom.style.display = "none";
+    });
+    ///////////////////////////4번 완료\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    //////////////////////////5번 시작\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+  window.addEventListener("load", bind)
+  function bind(){
+  const chkAll = document.querySelector(".chk_all");
+  const chks = document.querySelectorAll(".chk");
+  const btn = document.querySelector('.switch');
+  const result = document.querySelector("#result2");
+
+  btn.addEventListener("click", function () {
+    let total = 0;
+    let select = [];
+    let selectedSize = "";
+    let selectedDough = "";
+
+    //  사이즈 가격
+    const sizeRadios = document.querySelectorAll(".rad");
+    sizeRadios.forEach((radio) => {
+    if (radio.checked) {
+    selectedSize = radio.value;
+    if (radio.value == "Large (30000원)") total += 30000;
+    else if (radio.value == "Regular (20000원)") total += 20000;
+    else if (radio.value == "Mini (10000원)") total += 10000;
+    }
+    });
+
+    //  토핑 가격
+    chks.forEach((chk) => {
+    if (chk.checked) {
+    select.push(chk.value);
+
+    if (chk.value == "페페로니 (+2000원)") total += 2000;
+    else if (chk.value == "베이컨 (+1500원)") total += 1500;
+    else if (chk.value == "치즈 (+2000원)") total += 2000;
+    else if (chk.value == "파인애플 (+2000원)") total += 2000;
+    else if (chk.value == "버섯 (+1000원)") total += 1000;
+    else if (chk.value == "옥수수 (+500원)") total += 500;
+
+    }
+    });
+    //  도우 가격
+    const doughRadios = document.querySelectorAll(".dough");
+    doughRadios.forEach((radio) => {
+      if (radio.checked) {
+        selectedDough = radio.value;
+        if (radio.value == "치즈고구마크러스트 (+3000원)") total += 3000;
+        else if (radio.value == "치즈크러스트 (+2000원)") total += 2000;
+        else if (radio.value == "고구마크러스트 (+2000원)") total += 2000;
+      }
+    });
+
+    // 출력
+  result.innerHTML =
+  "사이즈: " + selectedSize + "<br>" +
+  "토핑: " + (select.length > 0 ? select.join(", ") : "없음") + "<br>" +
+  "도우: " + selectedDough + "<br>" +
+  "총 가격: " + total + "원";
+  });  
+
+  chkAll.addEventListener("click", function () {
+  chks.forEach((chk) => {
+  chk.checked = chkAll.checked;
+  });
+  });
+  chks.forEach((chk) => {
+  chk.addEventListener("click", function () {
+  let count = 0;
+  chks.forEach((c) => {
+  if (c.checked) count++;
+  });
+  chkAll.checked = count == chks.length;
+  });
+  });
+}
+//////////////////////////6번 시작\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+     function btnClick3() {
+    const msg = document.querySelector("#todoBox");
+    const id = document.querySelector("#todoList").value;
+    if(id == ""){
+      msg.innerHTML += `<br> 뭐라도 써주세요`;
+    }else{
+      msg.innerHTML += `<br> ${id}`;
+    }
+  }
+
+  function btnClick5(){
+    const msg = document.querySelector("#todoBox");
+    msg.innerHTML = "신청 목록";
+  }
+
+
+  
+    
+    </script>
+</body>
+</html>
+    <!-- Mission -->
+    <!-- 1번  신청 버튼 누르면 input의 글시가 아래에 쌓인다. -->
+    <!-- 2번 주문정보와 같음 버튼을 누르면 주문자의 정보가 배송정보로 복사되어 출력됨. -->
+    <!-- 3번  메뉴가 여러 개 일 때 선택한 메뉴만 특이하게 보이게. 예를 들어 밑줄이 쳐지든가,
+    글씨가 굵어지는 것.-->
+    <!-- 4번 썸네일 클릭 또는 hover(mouseover) 시 큰 그림 변경 및 유지 -->
+    <!-- 5번 pizza주문 시스템 주문/주문 정보 
+    Large, 옥수수, 버섯, 씬도우
+    합계 3억 -->
+    <!-- 6번 todoList 할 일 목록 관리 시스템 추가 버튼
+    추가버튼 클릭: input 내용 추가
+    할 일 체크하면 할 일 글씨 취소선
+    할 일 삭제하면 할 일 삭제
+    전체선택 구현
+    선택취소 구현  -->

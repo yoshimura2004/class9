@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./asset/js/14_event_form.js"></script>
+</head>
+<body>
+    <form id = "form" method = "get" action = "https://search.naver.com/search.naver">
+        <input type = "text" id = "keyword" name = "query" placeholder = "검색어를 입력해줘잉">
+        <select id = "site">
+        <option value = "1">네이버</option>
+        <option value = "2">구글</option>
+        </select>
+        <button type = "submit">검색</button>
+        <style>
+        
+        .btn{
+            margin: 10px;
+            padding: 5px;
+            width: 100px;
+            border-radius: 30px;
+            background-color: rgb(236, 225, 225,0.3);
+            border-color: rgb(205, 197, 182);
+        }
+        .chk  {
+            width: 15px;
+            height: 15px;
+            margin: 10px;
+        }
+        .chk_all{
+            width: 20px;
+            height: 20px;
+            margin: 15px;
+        }
+        .chksize{
+            font-size: 20px;
+        }
+        .fontsize{
+            font-size: 30px;
+            font-style: oblique;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: 600;
+            color:rgba(227, 15, 47, 0.3);
+        }
+        body{
+            background-color: rgba(255, 200, 200, 0.3);
+        }
+        #parent {
+            border: 1px solid red;
+            background-color: tomato;
+        }
+        #child1 {
+            border: 1px solid blue;
+            background-color: rgb(105, 105, 202);
+            padding: 10px;
+        }
+        #child2 {
+             border: 1px solid purple;
+             background-color: rgb(204, 95, 204);
+        }
+</style>
+<div id = "parent">
+    부모
+     <div id = "child1"> 자식1</div>
+     <div id = "child1"> 자식2</div>
+</div>
+
+
+
+
+
+
+    </form>
+  
+    <!-- 문제 1.여러 개의 checkbox가 있을 때
+        선택 버튼을 클릭하면 
+        선택한 토핑의 값을 따로 출력합니다.
+
+        문제 2. 
+        전체 선택을 구현하세요.
+         2-1
+         전체선택 체크 시, 모두 선택됨.
+         전체선택 체크 해제 시, 모두 선택 해제.
+         2-2
+         전체선택 체크 되어 있는 상태에서, 하나라도 해제 시,
+         전체 선택이 해제됨.
+         모든 요소를 각각  선택해서 직접 전체 선택을 할 경우에 
+         전체 선택이 체크 됨.
+        -->
+     
+    <div>
+        <h1>피자토핑</h1>
+        <label class = "fontsize"><input type = "checkbox" class ="chk_all"> 전체선택 </label><br>
+        <lavel class = "chksize">
+        <input type = "checkbox" class = "chk" value = "페페로니">페페로니
+        <input type = "checkbox" class = "chk" value = "베이컨">베이컨
+        <input type = "checkbox" class = "chk" value = "치즈">치즈
+        <input type = "checkbox" class = "chk" value = "파인애플">파인애플
+        <input type = "checkbox" class = "chk" value = "버섯">버섯
+        <input type = "checkbox" class = "chk" value = "옥수수">옥수수
+        </lavel>
+        <br>
+    <input type = "button" class= "btn"  value = "선택">
+        </div>
+  <div id = "result"></div>
+        
+
+
+</body>
+</html>
