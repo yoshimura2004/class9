@@ -30,6 +30,7 @@
 
   <textarea id = "textarea">chogigab</textarea>
   <div id ="view"></div>
+
   <script>
     setTimeout(function () {
       const text = document.querySelector("#id");
@@ -58,7 +59,7 @@
         }
       }
 
-      checkboxs[1].checked = true; // 식세기 체크됨
+      checkboxs[1].checked = true; 
 
       let checkboxs2 = document.querySelectorAll(".room:checked");
       for (let i = 0; i < checkboxs2.length; i++) {
@@ -81,6 +82,7 @@
     //   view.innerText = textarea.value.replace("\n","<br>")
       view.innerHTML = textarea.value.replace(/\n/g, "<br>")
     }, 1000 * 4);
+    
   </script>
 </body>
 </html>

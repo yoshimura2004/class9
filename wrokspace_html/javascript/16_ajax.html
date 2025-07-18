@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        window.addEventListener('load', bind)
+        function bind() {
+            document.querySelector('#btn1')
+                .addEventListener('click', function () {
+
+                    // ajax 객체 생성
+                    const xhr = new XMLHttpRequest();
+
+                    // 보낼 준비
+                    // 방식method, 주소
+                    xhr.open('get', 'https://jsonplaceholder.typicode.com/users')
+
+                    // 보내기
+                    xhr.send()
+
+                    xhr.onload = function () {
+                        console.log('다녀왔습니다')
+                        // xhr.responseText : 응답 받은 내용이 담겨있음
+                        console.log(xhr.responseText)
+                        const data = JSON.parse(xhr.responseText)
+                        console.log(data)
+                        console.log(data[0])
+                        console.log(data[0].username)
+                        console.log(data[0]['username'])
+                        console.log(data[0].address.geo.lat)
+                    }
+
+                    // xhr.onreadystatechange = function(){
+                    //     console.log(xhr.readystate)
+                    //     // if(xhr.readystate = 4)
+                    //     if(xhr.readystate = XMLHttpRequest.DONE) {
+                    //         console.log('다녀왔습니다')
+                    //     }
+                    // }
+                })
+            document.querySelector('#btn2')
+                .addEventListener('click', function () {
+
+                    // ajax 객체 생성
+                    const xhr = new XMLHttpRequest();
+
+                    // 보낼 준비
+                    // 방식method, 주소
+                    xhr.open('get', 'https://crix-api-cdn.upbit.com/v1/crix/candles/minutes/30?code=CRIX.UPBIT.KRW-BTC&count=2&to=2025-07-14T06%3A19%3A39Z&timestamp=1752474012515')
+
+                    // 보내기
+                    xhr.send()
+
+                    xhr.onload = function () {
+                        console.log(xhr.responseText)
+                        const data = JSON.parse(xhr.responseText)
+                        console.log(data[0].tradePrice)
+                    }
+                })
+            document.querySelector('#btn3')
+                .addEventListener('click', function () {
+
+                    // ajax 객체 생성
+                    const xhr = new XMLHttpRequest();
+
+                    // 보낼 준비
+                    // 방식method, 주소
+                    // CORS 문제로 막힘
+                    xhr.open('get', 'https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:005930|SERVICE_RECENT_ITEM:005930,035720&_callback=window.__jindo2_callback._9001')
+
+                    // 보내기
+                    xhr.send()
+
+                    xhr.onload = function () {
+                        console.log(xhr.responseText)
+                        const data = JSON.parse(xhr.responseText)
+                        console.log(data[0].tradePrice)
+                    }
+                })
+            document.querySelector('#btn4')
+                .addEventListener('click', function () {
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('get', 'http://humanjobs.co.kr')
+                    xhr.send()
+                    xhr.onload = function () {
+                        console.log(xhr.responseText)
+                    }
+
+                })
+            document.querySelector('#btn5')
+                .addEventListener('click', function () {
+
+                    const serviceKey = 'qVTaW2lslPLGXY2uHKVY3Vuc66ZQmC950RmMKYEg4Grvfz%2FeYbsd%2Fp4F0CzdQQwC26aBf2fTEHW76VU0OA04RQ%3D%3D'
+                    let url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'
+                    url += '?serviceKey=' + serviceKey
+                    url += '&numOfRows=1000'
+                    url += '&pageNo=1'
+                    url += '&dataType=JSON'
+                    url += '&base_date=20250715'
+                    url += '&base_time=0930'
+                    url += '&nx=63'
+                    url += '&ny=110'
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('get', url)
+                    xhr.send()
+                    xhr.onload = function () {
+                        console.log(xhr.responseText)
+                        const data = JSON.parse(xhr.responseText)
+                        // console.log(data)
+                        const item = data['response'].body.items.item
+                        // console.log(item[0])
+                        for (let i = 0; i < item.length; i++) {
+                            if (item[i].category == 'T1H') {
+                                // console.log(item[i])
+                                console.log(item[i].fcstTime, item[i].fcstValue)
+
+                                /*
+                                <tr>
+                                    <td>1100</td>
+                                    <td>22</td>
+                                </tr>
+                                */
+                                document.querySelector('#tbody').innerHTML += `
+                                    <tr>
+                                        <td>${item[i].fcstTime}</td>
+                                        <td>${item[i].fcstValue}</td>
+                                    </tr>
+                                `
+                            } else if (item[i].category == 'RN1') {
+                                // console.log(item[i])
+                                console.log(item[i].fcstTime, item[i].fcstValue)
+
+                                /*
+                                <tr>
+                                    <td>1100</td>
+                                    <td>22</td>
+                                </tr>
+                                */
+                                document.querySelector('#tbody1').innerHTML += `
+                                    <tr>
+                                        <td>${item[i].fcstTime}</td>
+                                        <td>${item[i].fcstValue}</td>
+                                    </tr>
+                                `
+                            }
+                        }
+
+                        const result = {
+                            1100: {
+                                T1H: 23,
+                                RN1: '강수 없음'
+                            }
+                        }
+                        for (let i = 0; i < item.length; i++) {
+                            if (!result[item[i].fcstTime]) {
+                                result[item[i].fcstTime] = {}
+                            }
+
+                            if (item[i].category == 'T1H') {
+                                result[item[i].fcstTime].T1H = item[i].fcstValue
+                            }
+                            if (item[i].category == 'RN1') {
+                                result[item[i].fcstTime].RN1 = item[i].fcstValue
+                            }
+                            if (item[i].category == 'REH') {
+                                result[item[i].fcstTime].REH = item[i].fcstValue
+                            }
+                        }
+                        console.log(result)
+                        const tbody10 = document.querySelector('#tbody10')
+                        tbody10.innerHTML = ''
+                        for( let key in result ){
+                            console.log('key', key)
+                            console.log('result.key', result.key)
+                            tbody10.innerHTML += `
+                                <tr>
+                                    <td>${key}</td>
+                                    <td>${result[key]['T1H']}</td>
+                                    <td>${result[key]['RN1']}</td>
+                                    <td>${result[key]['REH']}</td>
+                                </tr>
+                            `
+                            
+                        }
+                    }
+                })
+
+            document.querySelector('#btn6')
+                .addEventListener('click', function () {
+                
+                    const url = 'https://jsonplaceholder.typicode.com/users'
+                    const option = {
+                        method: 'get'
+                    }
+
+                    console.log(1)
+                    fetch(url, option)
+                        .then(function(response){
+                            return response.json()
+                        }).then(function(data){
+                            console.log(data)
+                        }).catch(function(error){
+                            console.log(error)
+                        })
+
+                    console.log(3)
+
+                })
+
+            $('#btn7').off('click').on('click', function(){
+                // 스피너-로딩중 표시
+                $.ajax({
+                    url: 'http://naver.com',
+                    type: 'get',
+                    success: function(data){
+                        console.log('성공')
+                        // json일 경우 알아서 json으로 넘어옴
+                        console.log(data)
+                    },
+                    error: function(data){
+                        console.log('실패')
+                        console.log('ERROR', data)
+                    },
+                    complete: function(){
+                        console.log('무조건 실행')
+                    }
+                })
+            })
+
+
+            try {
+                console.log(1, '실행')
+                // throw new Error('에러')
+                console.log(2, '여전히 실행 중')
+            } catch (err) {
+                console.log(3, 'catch')
+                console.log(4, err)
+            } finally {
+                console.log(5, '무조건 실행')
+            }
+            console.log('요기?')
+
+            $('#btn8').off('click').on('click', function(){
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/users',
+                    type: 'get'
+                }).done(function(data){
+                    console.log('성공')
+                    console.log(data)
+                }).fail(function(data){
+                    console.log('실패')
+                    console.log('ERROR', data)
+                }).always(function(){
+                    console.log('무조건 실행')
+                })
+            })
+
+            $('#btn9').on('click', function(){
+                let msg = $('#msg').val().replace(/\n/g, '%0a')
+                $.ajax({
+                    url: 'https://api.telegram.org/bot8158265202:AAEGFcZaKxkqLBQOK_i2J3_8-GnRJZyR6A8/sendMessage?chat_id=5812403900&text='+msg,
+                    type: 'get'
+                })
+            })
+
+            $('#btn10').on('click', function(){
+                let msg = $('#msg2').val()
+                const key = 'AIzaSyC9apUpgODDU-Nq9MuziXJ0J59A-DZuzh4'
+                const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+key
+                const data = {
+                    contents: {
+                        role: 'user',
+                        parts: [{
+                            text: msg
+                        }]
+                    }
+                }
+                const xhr = new XMLHttpRequest();
+                xhr.open('post', url)
+                xhr.setRequestHeader('Content-Type', 'application/json')
+                xhr.send( JSON.stringify(data) )
+                xhr.onload = function(){
+                    console.log('젬미니가 말한다')
+                    console.log(xhr.responseText)
+                    const response = JSON.parse(xhr.responseText)
+                    const answer = response.candidates[0].content.parts[0].text
+                    $('#gemini').html( answer.replace(/\n/g, '<br>') )
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <button type="button" id="btn1">ajax 실행</button><br>
+    <button type="button" id="btn2">업비트</button><br>
+    <button type="button" id="btn3">네이버주식</button><br>
+    <button type="button" id="btn4">휴먼잡스</button><br>
+    <button type="button" id="btn5">날씨예보</button><br>
+    <button type="button" id="btn6">fetch</button><br>
+    <button type="button" id="btn7">jQuery</button><br>
+    <button type="button" id="btn8">jQuery2</button><br>
+
+    <hr>
+        <textarea id="msg"></textarea>
+        <br>
+        <button id="btn9">텔레그램 발송</button>
+    <hr>
+        <textarea id="msg2"></textarea>
+        <br>
+        <button id="btn10">gemini에게 물어보기</button>
+        <br>
+        <div id="gemini"></div>
+    <hr>
+
+
+    <div>
+        <table border=1>
+            <thead>
+                <tr>
+                    <th>시간</th>
+                    <th>온도</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+        <table border=1>
+            <thead>
+                <tr>
+                    <th>시간</th>
+                    <th>강수량</th>
+                </tr>
+            </thead>
+            <tbody id="tbody1">
+            </tbody>
+        </table>
+
+        <table border=1>
+            <thead>
+                <tr>
+                    <th>시간</th>
+                    <th>온도</th>
+                    <th>강수량</th>
+                    <th>습도</th>
+                </tr>
+            </thead>
+            <tbody id="tbody10">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

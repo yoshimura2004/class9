@@ -19,6 +19,8 @@ public class CalcExam {
 		
 		Calc calc = new Calc();
 		
+		System.out.println(calc.plus(3,5));
+		calc.plus(3,5);
 		
 		
 		

@@ -8,6 +8,7 @@ public class CarExam {
 		
 		Car c = new Car(null);
 		Car c2 = new Car("black");
-		
+		System.out.println(c.maxSpeed);
+	
 	}
 }

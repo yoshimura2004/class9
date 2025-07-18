@@ -72,6 +72,16 @@ public class Calculator {
 				
 				return result3;
 		}
+			
+			int gobsam(int x2, int y2) {
+				System.out.println("x2" + x2);
+				System.out.println("y2" + y2);
+				
+				int result4 = x2 * y2;
+				
+				return  result4;
+			}
+			
 		//int 배열의 모든 값을 더하는 메소드
 			int sum(int[] array) {
 				int sum = 0;

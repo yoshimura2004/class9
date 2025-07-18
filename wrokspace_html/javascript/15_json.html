@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // 배열 : 값을 순서로 관리
+        const array = [];
+
+    // json : 값을 key로 관리하며, 순서를 보장하지 않는다.
+    
+    // json 선언 방법은 {} 
+    let json = {};
+    const k3 = "v2"
+    //  가능하면 key는 ""로 감싸준다. ''말고. 왜? 그냥 하라면 해
+    // 다른 시스템(언어)과 호환성이 높다.
+    // js와의 관계가 없다.
+    // key는 유일무이하게 관리된다.
+    // 순서를 보장하지 않는다.
+    json = {
+        "key": "value",
+        "num": 123,
+        "k1": "v1",
+        k2: k3,
+        k4 : array,
+        k5: function(){
+            console.log("함수실행")
+        },
+        k6: {
+            c1: "c_v1",
+            c2: "c_v2"
+        }
+    }
+    console.log("json", json)
+    console.log("json"+ json)
+
+    // 값의 접근 방법
+    // 방법1: 배열 처럼 접근
+    // json.key or json[] .으로 가거나 배열로 뽑거나.
+    console.log("json['key']: ", json ['key'])
+    //방법2 : 프로퍼티처럼 접근
+    console.log("json.key: ", json.key);
+    console.log("json.k6.c1:", json.k6.c1);
+    console.log("json['k6'][c1] :", json['k6']['c1']);
+    const k = "k6"
+    console.log("json['k6'][c1] :", json[k]['c1']);
+
+    json.k4.push(1)
+    json.k4.push(2)
+    console.log("k4 :", json.k4)
+
+    json.k5()
+
+    // 키가 있으면 값을 덮어쓴다.
+    // 키가 없으면 추가한다.
+
+    json.key = "value2"
+    console.log("json.key :", json.key)
+
+    json.key2 = "key2"
+    console.log("json.key2 :", json.key2)
+    console.log("json.key3 :", json.key3)
+
+    console.log("json.k4.lengt:", json.k4.lengt)
+    json.k4.lengt = 5
+    console.log("json.k4.lengt:",json.k4.lengt)
+    console.log("json.k4", json.k4)
+
+    // 네트워크는 모든 걸 문자형식으로 전송해야 한다. 
+    // json을 문자열로 만들어 줌. stringify or parse
+    //  단, 값이 함수인 것은 제외.
+    const str = JSON.stringify(json)
+    console.log("str:", str)
+
+    const json2 = JSON.parse( str )
+    console.log("json2 : ", json2)
+
+    // json 형식이 아니라 오류
+    // JSON.parse ('asdf')
+
+    const arrJson = [{
+        empno: "7788",
+        ename: "scott"
+    },{
+        empno: "1234",
+        ename: "Allen"
+    }]
+    const emp = JSON.stringify(arrJson)
+    console.log(emp)
+    
+    console.log(JSON.parse(emp))
+
+    // for in은 인덱스를 뽑아준다.
+    //  json에서의 인덱스는 key를 뜻한다.
+    for(let k in json){
+        console.log("k:", k, json[k])
+    }
+
+    // json의 모든 key를 배열로 가져오기. Object 
+    const keys = Object.keys(json)
+    console.log("keys :", keys)
+
+    // key 삭제
+    delete json.k4
+    delete json['k4']
+    
+   
+</script>
+<body>
+    
+</body>
+</html>

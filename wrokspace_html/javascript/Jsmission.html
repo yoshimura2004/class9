@@ -158,10 +158,10 @@
         <!--///////////////////// 5번 완료 \\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
         <!-- 6번 TODO 리스트   
          추가 버튼 클릭 : input 내용 추가
-할일 체크하면 할일글씨 취소선
-할일 삭제하면 할일 삭제
-전체선택 구현
-선택취소 구현         
+        할일 체크하면 할일글씨 취소선
+        할일 삭제하면 할일 삭제
+        전체선택 구현
+        선택취소 구현         
       6-1 준비물 : 검색창, 검색 버튼, 선택 완료 버튼.
       1. 검색 창에 할 일을 검색
       2. 밑에 할 일 들이 촤라라락 나옴.
@@ -173,15 +173,16 @@
       전체 선택을 누르면 모든 할 일들의 check box가 선택됨.
       check box에서 선택된 할 일들을 삭제 버튼을 누르면 삭제됨.
       -->
-     <div>
-        <input type="text" id = "todoList" placeholder="입력창입니다.">
-        <button onclick="btnClick3()">검색</button>
-        <button onclick="btnClick4()">선택완료</button>
-        <button onclick="btnClick5()">초기화</button>
-        </div>
-        <div id="todoBox">신청 목록</div> <br>
-        <hr>
-        <div class = "resultBox"> TodoList </div>
+    <div>
+    <input type="text" id="todoList" placeholder="할 일을 입력해주세요.">
+    <button onclick="btnClick3()">검색</button>
+    <button onclick="btnClick4()">선택완료</button>
+    <button onclick="btnClick5()">초기화</button>
+    </div>
+    <div id="todoBox">pre TodoList</div> <br>
+    <hr>
+    <div class="resultBox">TodoList</div>
+
 <script>
   function btnClick() {
     const msg = document.querySelector("#console");
@@ -266,7 +267,6 @@
     let selectedSize = "";
     let selectedDough = "";
 
-    //  사이즈 가격
     const sizeRadios = document.querySelectorAll(".rad");
     sizeRadios.forEach((radio) => {
     if (radio.checked) {
@@ -277,7 +277,6 @@
     }
     });
 
-    //  토핑 가격
     chks.forEach((chk) => {
     if (chk.checked) {
     select.push(chk.value);
@@ -291,7 +290,7 @@
 
     }
     });
-    //  도우 가격
+
     const doughRadios = document.querySelectorAll(".dough");
     doughRadios.forEach((radio) => {
       if (radio.checked) {
@@ -302,7 +301,6 @@
       }
     });
 
-    // 출력
   result.innerHTML =
   "사이즈: " + selectedSize + "<br>" +
   "토핑: " + (select.length > 0 ? select.join(", ") : "없음") + "<br>" +
@@ -326,25 +324,83 @@
   });
 }
 //////////////////////////6번 시작\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+let todoCount = 0; // 고유 id 생성을 위한 카운트
 
-     function btnClick3() {
-    const msg = document.querySelector("#todoBox");
-    const id = document.querySelector("#todoList").value;
-    if(id == ""){
-      msg.innerHTML += `<br> 뭐라도 써주세요`;
-    }else{
-      msg.innerHTML += `<br> ${id}`;
+// 검색버튼 클릭 시, 체크박스와 label 추가
+function btnClick3() {
+  const msg = document.querySelector("#todoBox");
+  const id = document.querySelector("#todoList").value.trim();
+
+  if (id == "") {
+    msg.innerHTML += `<br>뭐라도 써주세요`;
+    return;
+  }
+
+  const newId = `todo-${todoCount++}`;
+  msg.innerHTML += `
+    <div>
+      <input type="checkbox" id="${newId}" class="tempTodo" value="${id}">
+      <label for="${newId}">${id}</label>
+    </div>
+  `;
+}
+
+// 선택 완료 버튼 클릭 시 , 체크된 항목만 resultBox에 표시
+    function btnClick4() {
+    const checked = document.querySelectorAll(".tempTodo:checked");
+    const resultBox = document.querySelector(".resultBox");
+
+    if (checked.length == 0) {
+    resultBox.innerHTML = "아무것도 선택되지 않았습니다.";
+    return;
     }
-  }
 
-  function btnClick5(){
+    resultBox.innerHTML = "<b>TodoList:</b><br>";
+
+    checked.forEach((item) => {
+    resultBox.innerHTML += `
+    <div>
+    <input type="checkbox" class="finalTodo" value="${item.value}">
+    <label>${item.value}</label>
+    </div>
+    `;
+    });
+
+    resultBox.innerHTML += `
+    <br>
+    <button onclick="selectAll()">전체선택</button>
+    <button onclick="deleteSelected()">삭제</button>
+    `;
+    }
+
+    // 초기화 버튼
+    function btnClick5() {
     const msg = document.querySelector("#todoBox");
-    msg.innerHTML = "신청 목록";
-  }
+    const msg2 = document.querySelector("#todoList");
+    msg.innerHTML = "pre TodoList";
+    msg2.innerHTML = "TodoList";
+    todoCount = 0;
+    }
+
+    // 전체 선택 버튼
+    function selectAll() {
+    document.querySelectorAll(".finalTodo").forEach((el) => el.checked = true);
+    }
+
+    // 삭제 버튼
+    function deleteSelected() {
+    document.querySelectorAll(".finalTodo:checked").forEach((el) => {
+    el.parentElement.remove();
+    });
+    }
 
 
+
+
+   
   
-    
+  
+
     </script>
 </body>
 </html>

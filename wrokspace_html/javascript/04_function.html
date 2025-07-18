@@ -61,6 +61,7 @@
         console.log(obj)
         }
 
+        
         log(1,2);
         let f = [10,20]
         console.log(...f);         //이거랑
@@ -69,7 +70,7 @@
 
         let g = "console.log(123)";
         eval(g); // string을 javascript로 표현해주는 아이 이다.
-
+        
         function print(){
         console.log("print 실행")
         }
@@ -134,14 +135,15 @@
         let noName = function (){
                 console.log("이건 익명함수에요.")
         }
-        noName();
 
+        noName();
         //위의 것과 완벽히 동일하다.
         // function noName (){
         //         console.log("이건 익명함수에요.")
         // }
 
         const m = 100;
+        
         change(m,noName);
         change(100, function(){
                 console.log("익함")
