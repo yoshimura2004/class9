@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form method="post" action="pizza" id="pizzaForm">
+
+    <div>
+        <h1>HumanPizza</h1>
+        
+        피자 종류: <select name="pizzaType">
+            <option value="불고기">불고기</option>
+            <option value="콤비네이션">콤비네이션</option>
+            <option value="포테이토">포테이토</option>
+            <option value="쉬림프">쉬림프</option>
+        </select>
+        <br>
+        
+        피자 사이즈: 
+        <input type="radio" name="size" value="Large" checked>Large
+        <input type="radio" name="size" value="Regular">Regular
+        <input type="radio" name="size" value="Small">Small
+        
+        <br>
+        
+        피자 토핑:
+        <input type="checkbox" name="topping" value="페페로니">페페로니
+        <input type="checkbox" name="topping" value="베이컨">베이컨
+        <input type="checkbox" name="topping" value="치즈">치즈
+        <input type="checkbox" name="topping" value="파인애플">파인애플
+        <input type="checkbox" name="topping" value="버섯">버섯
+        <input type="checkbox" name="topping" value="옥수수">옥수수
+        <br>
+        
+        요청사항: <br>
+        <textarea name="requestNote">요청사항 입력란</textarea>
+        <br>
+        <input type="submit" class="btn" value="주문 ㄱㄱ">
+    </div>
+</form>
+</body>
+</html>

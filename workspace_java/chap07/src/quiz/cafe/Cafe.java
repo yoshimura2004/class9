@@ -33,6 +33,30 @@ public class Cafe {
 		System.out.println(menuName + " 주문을 받았습니다.");
 	}
 	
+	// 메뉴 이름이 있는지 확인
+	boolean hasMenu(String name) {
+		for (int i = 0; i < menu.size(); i++) {
+			String data = (String) menu.get(i);
+			String menuName = data.split(":")[0];
+			if (menuName.equals(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// 메뉴 가격 얻기
+	int getPrice(String name) {
+		for (int i = 0; i < menu.size(); i++) {
+			String data = (String) menu.get(i);
+			String[] parts = data.split(":");
+			if (parts[0].equals(name)) {
+				return Integer.parseInt(parts[1]);
+			}
+		}
+		return 0;
+	}
+	
 	// 결제 
 	int pay(int price, int money) {
 		if (money < price) {
@@ -59,14 +83,13 @@ public class Cafe {
 		}
 	}
 	
-	// 설거지
-	void wash() {
-		System.out.println("설거지 완료!");
-	}
-
 	// 서빙
 	void serve() {
 		System.out.println("커피를 서빙했습니다!");
+	}
+	// 설거지
+	void wash() {
+		System.out.println("설거지 완료!");
 	}
 
 	// 마감

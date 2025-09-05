@@ -1471,6 +1471,204 @@ select * from emp_fk;
 
 --RDBMS 에서 R을담당
 
+-- 테이블 생성
+create table restaurant (
+    restaurant_id varchar2(20) primary key,
+    name varchar2(20),
+    address varchar2(20),
+    phone varchar2(11)
+);
+
+create table menu (
+    menu_id varchar2(20) primary key,
+    restaurant_id varchar2(20),
+    menu_name varchar2(20),
+    price varchar2(20),
+    foreign key (restaurant_id) references restaurant(restaurant_id)
+);
+
+create table member (
+    member_id varchar2(20) primary key,
+    name varchar2(20),
+    phone varchar2(11),
+    address varchar2(20)
+);
+
+create table orders (
+    order_id varchar2(20) primary key,
+    member_id varchar2(20),
+    restaurant_id varchar2(20),
+    address varchar2(20),
+    request varchar2(20),
+    totalprice varchar2(20),
+    order_type varchar2(20),
+    order_time varchar2(20),
+    order_boolean number(1, 2),
+    order_menus varchar2(20),
+    foreign key (member_id) references member(member_id),
+    foreign key (restaurant_id) references restaurant(restaurant_id)
+);
+
+-- 1개 주문 조회
+
+select
+    o.order_id,
+    m.name as member_name,
+    m.phone as member_phone,
+    r.name as restaurant_name,
+    r.phone as restaurant_phone,
+    o.address as order_delivery_address,
+    o.request,
+    o.totalprice,
+    o.order_type,
+    o.order_time,
+    o.order_boolean,
+    mn.menu_name as ordered_menu,
+    mn.price as menu_price
+from orders o
+join member m on o.member_id = m.member_id
+join restaurant r on o.restaurant_id = r.restaurant_id
+join menu mn on o.order_menus = mn.menu_id
+where o.order_id = 'ORD-001';
 
 
- 
+
+
+drop table tbl_todo;
+drop sequence seq_tbl_todo;
+
+create table tbl_todo(
+    tno number primary key,
+    title varchar2(4000) not null,
+    dueDate date,
+    finished number(1) 
+);
+
+select * from tbl_todo;
+
+create sequence seq_tbl_todo;
+
+insert into tbl_todo ( tno, title, dueDate, finished )
+values (seq_tbl_todo.nextval, '', null, null);--',to_date('2025-08-20', 'yyyy-mm--dd'), 0);
+
+delete tbl_todo
+    where tno = 1;
+
+commit ;
+
+select * from tbl_todo where  tno = 26; 
+
+update tbl_todo
+set title = '배꾸기',
+    duedate = '2025-01-01',
+    finished = 1
+where tno = 40;
+
+drop table emp2;
+
+select * from emp2;
+
+
+create table emp2
+as select * from emp;
+
+select * from emp2
+where empno = 7369;
+
+delete emp2
+where empno = 7369;
+
+drop table movie;
+
+select * from movie;
+
+create table movie (
+    movie_id number primary key,
+    title varchar2(4000),
+    img_url varchar2(4000),
+    open_date date
+);
+
+insert into movie
+    values( 1, 'F1', 'img', '2025-08-20');
+
+delete from movie where movie_id = 1;
+
+commit;
+
+drop table employee;
+
+
+CREATE TABLE employee (
+    empno NUMBER(10) NOT NULL,
+    ename VARCHAR2(50) NOT NULL,
+    role VARCHAR2(10) NOT NULL,
+    CONSTRAINT pk_employee PRIMARY KEY (empno),
+    CONSTRAINT chk_role CHECK (role IN ('USER', 'ADMIN'))
+);
+
+
+INSERT INTO employee (empno, ename, role) VALUES (1001, 'John', 'USER');
+INSERT INTO employee (empno, ename, role) VALUES (1002, 'Alice', 'ADMIN');
+INSERT INTO employee (empno, ename, role) VALUES (1003, 'Bob', 'USER');
+
+COMMIT;
+
+select * from emp2;
+
+
+select * from emp2
+order by hiredate desc;
+-- 각자 번호 붙이기
+select rownum, * emp2.*from emp2
+orderby hire date desc;
+
+/* 5 */select job, count(*) as cnt
+/* 1 */from emp
+/* 2 */where sal > 1000
+/* 3 */group by job
+/* 4 */     having count(*) >=3
+/* 6 */ order by cnt;
+
+
+select rownum, t1.* from(
+select emp2.*from emp2
+order by hiredate desc
+)t1;
+
+select * from (
+    select rownum rnum, t1.* from(
+        select emp2.*from emp2
+        order by hiredate desc
+    )t1
+)t2
+where rnum >= 3 and rnum <= 6;
+
+truncate table emp2;
+drop table emp2;
+
+INSERT INTO emp2 (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+SELECT 
+    e.empno + lvl AS empno,                                 -- empno 증가
+    lvl || '_' || e.ename AS ename,                         -- 이름 앞 숫자
+    e.job, 
+    e.mgr,
+    e.hiredate + lvl AS hiredate,                           -- 하루씩 증가
+    e.sal + lvl AS sal,                                     -- sal 1씩 증가
+    e.comm, 
+    e.deptno
+FROM emp e
+JOIN (
+    SELECT LEVEL AS lvl 
+    FROM dual 
+    CONNECT BY LEVEL <= 21
+) l
+ON 1=1;
+
+select * from emp2;
+
+select count(*) from emp2;
+
+
+
+

@@ -174,7 +174,22 @@ select * from emp
     join dept d on e.deptno = d.deptno
     order by d.dname desc;
     
-    
+    CREATE TABLE Restaurant (
+    restaurant_id VARCHAR2(20) PRIMARY KEY,
+    name VARCHAR2(20),
+    address VARCHAR2(20),
+    phone VARCHAR2(11)
+);
+
+CREATE TABLE Menu (
+    menu_id VARCHAR2(20) PRIMARY KEY,
+    restaurant_id VARCHAR2(20),
+    menu_name VARCHAR2(20),
+    price VARCHAR2(20),
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
+);
+
+
             
     
       

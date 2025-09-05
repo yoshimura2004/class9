@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 지도 이미지</title>
+    <link rel="stylesheet" href="nowtimemap.css">
+    <script src="nowtimemap.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fff;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            height: 80%;
+        }
+        .sidebar {
+            width: 30%;
+            background-color: #9e6002;
+            padding: 20px;
+            margin-left: 50px;
+            border: 1px solid yellow;
+            border-radius: 50px;            
+        }
+        .sidebar h1 {
+            font-size: 1.2em;
+            margin: 0 0 20px 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .map-area {
+            width: 70%;
+            position: relative;
+            margin-left: 40px; /* sidebar와의 간격을 40px로 증가 */
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #hospital {
+            margin-top: 90px;
+        }
+        #big-name {
+            font-size: 150%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1 id="big-name">가까운 병원 확인하기</h1>
+            <ul id="hospital">
+                <li id="hospital-address">병원 주소</li>
+                <li id="hospital-phone">메인병동 전화번호</li>
+                <li id="hospital-emergency">응급실 전화번호</li>
+                <li id="hospital-review">병원 리뷰</li>
+                <li>지도 상세보기
+                    <ul>
+                        <li id="hospital-map-link">(클릭 시 카카오맵으로 이동)</li>
+                    </ul>
+                    <ul id="hospital-website">병원 홈페이지 바로가기 <br><br>
+                        (클릭 시 병원 홈페이지로 이동)
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="map-area">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=adf8e79657bb6de94b088d2b357d14a6&libraries=services"></script>
+    <script>
+        // 지도 초기화
+        var mapContainer = document.getElementById('map'),
+            mapOption = {
+                center: new kakao.maps.LatLng(37.56837, 126.97787), // 기본 중심
+                level: 4, // 지도 확대 레벨
+                mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도 종류
+            };
+
+        // 지도 생성
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // 사용자 위치 기반 병원 검색
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const locPosition = new kakao.maps.LatLng(lat, lon);
+                    map.setCenter(locPosition);
+                    searchHospitals(locPosition);
+                },
+                (error) => {
+                    console.error("위치 정보 오류:", error);
+                    searchHospitals(mapOption.center); // 기본 위치로 대체
+                }
+            );
+        } else {
+            console.error("브라우저가 위치 정보를 지원하지 않습니다.");
+            searchHospitals(mapOption.center);
+        }
+
+        // 근처 병원 검색 함수
+        function searchHospitals(locPosition) {
+            const ps = new kakao.maps.services.Places();
+            const keyword = "병원";
+            const options = {
+                location: locPosition,
+                radius: 5000, // 5km 반경
+                sort: kakao.maps.services.SortBy.DISTANCE
+            };
+
+            ps.keywordSearch(keyword, (data, status, pagination) => {
+                if (status === kakao.maps.services.Status.OK) {
+                    displayMarkers(data);
+                } else {
+                    console.error("병원 검색 오류:", status);
+                    document.getElementById('hospital-address').textContent = "검색 결과 없음";
+                }
+            }, options);
+        }
+
+        // 마커와 인포윈도우 표시 함수
+        function displayMarkers(places) {
+            places.forEach((place) => {
+                const markerPosition = new kakao.maps.LatLng(place.y, place.x);
+                const marker = new kakao.maps.Marker({
+                    position: markerPosition,
+                    map: map
+                });
+
+                // 인포윈도우 생성
+                const infowindow = new kakao.maps.InfoWindow({
+                    content: `<div style="padding:5px;">${place.place_name || "가까운 병원"}</div>`
+                });
+
+                // 마커 클릭 시 인포윈도우 표시 및 사이드바 업데이트
+                kakao.maps.event.addListener(marker, 'click', () => {
+                    infowindow.open(map, marker);
+                    updateHospitalInfo(place);
+                });
+            });
+
+            // 첫 번째 병원 정보 자동 표시
+            if (places.length > 0) {
+                updateHospitalInfo(places[0]);
+                const firstMarker = new kakao.maps.Marker({
+                    position: new kakao.maps.LatLng(places[0].y, places[0].x),
+                    map: map
+                });
+                const firstInfowindow = new kakao.maps.InfoWindow({
+                    content: `<div style="padding:5px;">${places[0].place_name || "가까운 병원"}</div>`
+                });
+                firstInfowindow.open(map, firstMarker);
+            }
+        }
+
+        // 사이드바 병원 정보 업데이트 함수
+        function updateHospitalInfo(place) {
+            document.getElementById('hospital-address').textContent = place.address_name || "주소 정보 없음";
+            document.getElementById('hospital-phone').textContent = place.phone || "전화번호 정보 없음";
+            document.getElementById('hospital-emergency').textContent = "응급실 정보는 API에서 제공되지 않음";
+            document.getElementById('hospital-review').textContent = "리뷰 정보는 API에서 제공되지 않음";
+            const mapLink = document.getElementById('hospital-map-link');
+            mapLink.innerHTML = `<a href="${place.place_url}" target="_blank">카카오맵에서 상세보기</a>`;
+            const websiteLink = document.getElementById('hospital-website');
+            websiteLink.innerHTML = place.place_url
+                ? `<a href="${place.place_url}" target="_blank">병원 홈페이지 바로가기</a>`
+                : "홈페이지 정보 없음";
+        }
+    </script>
+</body>
+</html>
