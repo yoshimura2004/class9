@@ -6,13 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>품질 관리</title>
-<link rel="stylesheet" href="css/style.css">
+
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="${ctx}/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <!-- Bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 /* 테이블 균일화 */
 .table th, .table td {

@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8" />
 <title>제품 등록/수정</title>
-<link rel="stylesheet" href="css/style.css">
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="${ctx}/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- 전역 레이아웃 사용 -->
 <style>
