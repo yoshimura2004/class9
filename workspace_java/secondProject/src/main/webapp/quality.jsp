@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,114 +10,228 @@
 <title>품질 관리</title>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+
 <link rel="stylesheet" href="${ctx}/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Bootstrap -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet">
 <style>
-/* 테이블 균일화 */
-.table th, .table td {
-	vertical-align: middle;
-	white-space: nowrap;
-	font-size: 0.9rem;
+/* 컨테이너 */
+.container {
+	max-width: 1200px;
+	margin: 24px auto;
+	padding: 28px;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 6px 16px rgba(0, 0, 0, .08);
 }
 
-/* 각 열 폭 지정 */
-.table th:nth-child(1), .table td:nth-child(1) {
-	min-width: 80px;
-} /* 검사번호 */
-.table th:nth-child(2), .table td:nth-child(2) {
-	min-width: 90px;
-} /* 작업번호 */
-.table th:nth-child(3), .table td:nth-child(3) {
-	min-width: 90px;
-} /* 제품코드 */
-.table th:nth-child(4), .table td:nth-child(4) {
-	min-width: 100px;
-} /* 검사자 */
-.table th:nth-child(5), .table td:nth-child(5) {
-	min-width: 100px;
-} /* 검사결과 */
-.table th:nth-child(6), .table td:nth-child(6), .table th:nth-child(7),
-	.table td:nth-child(7) {
-	min-width: 100px;
-	text-align: right; /* 양품/불량 수량 숫자는 오른쪽 정렬 */
-}
-
-.table th:nth-child(8), .table td:nth-child(8), .table th:nth-child(9),
-	.table td:nth-child(9), .table th:nth-child(10), .table td:nth-child(10),
-	.table th:nth-child(11), .table td:nth-child(11) {
-	min-width: 120px;
-}
-
-.table th:nth-child(12), .table td:nth-child(12) {
-	min-width: 100px;
+h1 {
 	text-align: center;
+	margin: 0 0 18px;
+	letter-spacing: .02em;
 }
 
-.btn-quality-search, .btn-quality-register {
-	display: inline-flex;
+/* 검색 & 버튼 (부트스트랩 없이 자체 스타일) */
+.controls {
+	display: flex;
 	align-items: center;
-	justify-content: center;
-	padding: 8px 20px;
-	border-radius: 6px;
-	font-size: 0.95rem;
-	font-weight: 500;
-	white-space: nowrap; /* 글씨 줄바꿈 방지 */
-	border: none;
-	transition: background-color 0.2s ease-in-out;
+	gap: 12px;
+	margin-bottom: 14px;
 }
 
-/* 검색 버튼 */
-.btn-quality-search {
-	background-color: #3498db;
+.controls .search-form {
+	display: flex;
+	gap: 8px;
+	flex: 1;
+}
+
+.search-input {
+	flex: 1;
+	padding: 10px 12px;
+	border: 1px solid #d8dde3;
+	border-radius: 8px;
+	font-size: 14px;
+	background: #fff;
+}
+
+.btn {
+	padding: 10px 14px;
+	border: 0;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+	transition: transform .05s ease, box-shadow .2s ease, opacity .2s ease;
+}
+
+.btn:active {
+	transform: translateY(1px);
+}
+
+.btn-primary {
+	background: #1677ff;
 	color: #fff;
+	box-shadow: 0 2px 8px rgba(22, 119, 255, .25);
 }
 
-.btn-quality-search:hover {
-	background-color: #2980b9;
-}
-
-/* 등록 버튼 */
-.btn-quality-register {
-	background-color: #2ecc71;
+.btn-success {
+	background: #22c55e;
 	color: #fff;
+	box-shadow: 0 2px 8px rgba(34, 197, 94, .25);
 }
 
-.btn-quality-register:hover {
-	background-color: #27ae60;
+.btn-primary:hover, .btn-success:hover {
+	opacity: .95;
+}
+
+/* 테이블 */
+.table-responsive {
+	overflow-x: auto;
+	border: 1px solid #eef1f4;
+	border-radius: 10px;
+}
+
+table.table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	table-layout: fixed;
+}
+
+table.table th, table.table td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+thead.table-light th {
+	background: #f6f8fb !important;
+	color: #344053 !important;
+	font-weight: 700;
+	border-bottom: 1px solid #e7ecf1 !important;
+	padding: 12px 10px;
+}
+
+tbody td {
+	padding: 12px 10px;
+	border-bottom: 1px solid #f0f3f6;
+	color: #222;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+tbody tr:hover {
+	background: #fafcff;
+}
+
+/* 열 너비 가이드 */
+.table thead th:nth-child(1), .table tbody td:nth-child(1) {
+	width: 110px;
+} /* 검사번호 */
+.table thead th:nth-child(2), .table tbody td:nth-child(2) {
+	width: 110px;
+} /* 작업번호 */
+.table thead th:nth-child(3), .table tbody td:nth-child(3) {
+	width: 110px;
+} /* 제품코드 */
+.table thead th:nth-child(4), .table tbody td:nth-child(4) {
+	width: 110px;
+} /* 검사자 */
+.table thead th:nth-child(5), .table tbody td:nth-child(5) {
+	width: 100px;
+} /* 결과 */
+.table thead th:nth-child(6), .table tbody td:nth-child(6) {
+	width: 110px;
+	text-align: right;
+} /* 양품 */
+.table thead th:nth-child(7), .table tbody td:nth-child(7) {
+	width: 110px;
+	text-align: right;
+} /* 불량 */
+.table thead th:nth-child(8), .table tbody td:nth-child(8) {
+	width: 130px;
+} /* 제조일 */
+.table thead th:nth-child(9), .table tbody td:nth-child(9) {
+	width: 160px;
+} /* 검사일시 */
+.table thead th:nth-child(10), .table tbody td:nth-child(10) {
+	width: 130px;
+} /* 생성일 */
+.table thead th:nth-child(11), .table tbody td:nth-child(11) {
+	width: 130px;
+} /* 수정일 */
+.table thead th:nth-child(12), .table tbody td:nth-child(12) {
+	width: 110px;
+} /* 관리 */
+.num {
+	text-align: right;
+}
+
+.action a {
+	color: #1677ff;
+	text-decoration: none;
+	margin-right: 8px;
+}
+
+.action a:last-child {
+	margin-right: 0;
+}
+
+.text-success {
+	color: #16a34a !important;
+}
+
+.text-danger {
+	color: #e11d48 !important;
+}
+
+/* 차트 크기 */
+.charts {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+	margin-top: 16px;
+}
+
+.chart-box {
+	background: #fff;
+	border: 1px solid #eef1f4;
+	border-radius: 10px;
+	padding: 12px;
+	height: 320px;
+}
+
+.chart-box canvas {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+@media ( max-width :900px) {
+	.charts {
+		grid-template-columns: 1fr;
+	}
 }
 </style>
-
 </head>
 <body>
-	<%-- header --%>
 	<jsp:include page="header.jsp" />
-
-	<div class="main-container d-flex">
-		<%-- sidebar --%>
+	<div class="main-container">
 		<jsp:include page="sidebar.jsp" />
-
-		<%-- 본문 영역 --%>
-		<div class="content-area flex-grow-1 p-4">
+		<div class="content-area">
 			<div class="container">
-				<h2 class="mb-4">품질 관리</h2>
+				<h1>품질 관리</h1>
 
-				<!-- 검색 영역 -->
-				<div class="d-flex mb-3">
-					<input type="text" class="form-control me-2"
-						placeholder="검사번호 또는 작업번호 검색">
-					<button class="btn-quality-search">검색</button>
-					<a href="quality_form.jsp" class="btn-quality-register ms-2">검사
-						등록</a>
+				<div class="controls">
+					<form class="search-form" action="${ctx}/qualityList" method="get">
+						<input type="text" class="search-input" name="q" value="${q}"
+							placeholder="검사번호 또는 작업번호 검색 (두 글자 이상)">
+						<button type="submit" class="btn btn-primary">검색</button>
+					</form>
+						<a href="${ctx}/quality/form" class="btn btn-success">검사 등록</a>
 				</div>
 
-				<!-- 검사 내역 테이블 -->
 				<div class="table-responsive">
-					<table class="table table-bordered text-center align-middle">
+					<table class="table table-bordered">
 						<thead class="table-light">
 							<tr>
 								<th>검사번호</th>
@@ -133,61 +249,52 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>QC-001</td>
-								<td>WK-001</td>
-								<td>P-001</td>
-								<td>김철수</td>
-								<td class="text-success">양품</td>
-								<td>480</td>
-								<td>20</td>
-								<td>2025-08-30</td>
-								<td>2025-09-01 10:30</td>
-								<td>2025-09-01</td>
-								<td>2025-09-02</td>
-								<td><a href="#" class="text-primary">수정</a> | <a href="#"
-									class="text-danger">삭제</a></td>
-							</tr>
-							<tr>
-								<td>QC-002</td>
-								<td>WK-002</td>
-								<td>M-101</td>
-								<td>이영희</td>
-								<td class="text-danger">불량</td>
-								<td>110</td>
-								<td>10</td>
-								<td>2025-08-31</td>
-								<td>2025-09-02 15:00</td>
-								<td>2025-09-02</td>
-								<td>2025-09-03</td>
-								<td><a href="#" class="text-primary">수정</a> | <a href="#"
-									class="text-danger">삭제</a></td>
-							</tr>
-							<tr>
-								<td>QC-003</td>
-								<td>WK-003</td>
-								<td>R-505</td>
-								<td>박민수</td>
-								<td class="text-success">양품</td>
-								<td>195</td>
-								<td>5</td>
-								<td>2025-09-01</td>
-								<td>2025-09-03 09:20</td>
-								<td>2025-09-03</td>
-								<td>2025-09-03</td>
-								<td><a href="#" class="text-primary">수정</a> | <a href="#"
-									class="text-danger">삭제</a></td>
-							</tr>
+							<c:choose>
+								<c:when test="${empty qualityList}">
+									<tr>
+										<td colspan="12" class="text-muted py-3">등록된 검사 데이터가
+											없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="row" items="${qualityList}">
+										<tr>
+											<td>${row.qualityNo}</td>
+											<td>${row.workNo}</td>
+											<td>${row.standardCode}</td>
+											<td>${row.employeeNo}</td>
+											<td
+												class="${row.quResult eq '불량' ? 'text-danger' : 'text-success'}">${row.quResult}</td>
+											<td class="num"><fmt:formatNumber
+													value="${row.quQuantity}" /></td>
+											<td class="num"><fmt:formatNumber
+													value="${row.defectQuantity}" /></td>
+											<td><fmt:formatDate value="${row.quManufactureDate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td><fmt:formatDate value="${row.inspectionDate}"
+													pattern="yyyy-MM-dd HH:mm" /></td>
+											<td><fmt:formatDate value="${row.createDate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td><fmt:formatDate value="${row.updateDate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td class="action"><a
+												href="${ctx}/quality/form?no=${row.qualityNo}">수정</a> <a
+												class="text-danger"
+												href="${ctx}/quality/delete?no=${row.qualityNo}"
+												onclick="return confirm('삭제하시겠습니까?');">삭제</a></td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 				</div>
 
-				<!-- 차트 영역 -->
-				<div class="row mt-5">
-					<div class="col-md-6">
+				<div class="charts">
+					<div class="chart-box">
 						<canvas id="qualityResultChart"></canvas>
 					</div>
-					<div class="col-md-6">
+					<div class="chart-box">
 						<canvas id="defectChart"></canvas>
 					</div>
 				</div>
@@ -195,54 +302,39 @@
 		</div>
 	</div>
 
-	<!-- Chart.js -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<!-- JS: 차트 -->
 	<script>
-		// 품질 검사 결과 분포 (양품 vs 불량)
-		new Chart(document.getElementById('qualityResultChart'), {
-			type : 'pie',
-			data : {
-				labels : [ '양품', '불량' ],
-				datasets : [ {
-					data : [ 785, 35 ],
-					backgroundColor : [ '#4CAF50', '#F44336' ]
-				} ]
-			},
-			options : {
-				plugins : {
-					title : {
-						display : true,
-						text : '검사 결과 분포'
-					}
-				}
-			}
-		});
+    const results = [
+      <c:forEach var="x" items="${qualityList}" varStatus="s">
+        "${fn:escapeXml(x.quResult)}"<c:if test="${!s.last}">,</c:if>
+      </c:forEach>
+    ];
+    const labels = [
+      <c:forEach var="x" items="${qualityList}" varStatus="s">
+        "${fn:escapeXml(x.qualityNo)}"<c:if test="${!s.last}">,</c:if>
+      </c:forEach>
+    ];
+    const defects = [
+      <c:forEach var="x" items="${qualityList}" varStatus="s">
+        ${x.defectQuantity}<c:if test="${!s.last}">,</c:if>
+      </c:forEach>
+    ];
 
-		// 검사별 불량 수량
-		new Chart(document.getElementById('defectChart'), {
-			type : 'bar',
-			data : {
-				labels : [ 'QC-001', 'QC-002', 'QC-003' ],
-				datasets : [ {
-					label : '불량 수량',
-					data : [ 20, 10, 5 ],
-					backgroundColor : '#FF9800'
-				} ]
-			},
-			options : {
-				plugins : {
-					title : {
-						display : true,
-						text : '검사별 불량 수량'
-					}
-				},
-				scales : {
-					y : {
-						beginAtZero : true
-					}
-				}
-			}
-		});
-	</script>
+    const okCount = results.filter(r => r === '양품').length;
+    const ngCount = results.filter(r => r === '불량').length;
+
+    new Chart(document.getElementById('qualityResultChart'), {
+      type: 'pie',
+      data: { labels: ['양품','불량'], datasets: [{ data:[okCount, ngCount], backgroundColor: ['#4CAF50','#F44336'] }] },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ title:{ display:true, text:'검사 결과 분포' } } }
+    });
+
+    new Chart(document.getElementById('defectChart'), {
+      type: 'bar',
+      data: { labels, datasets: [{ label:'불량 수량', data:defects }] },
+      options: { responsive:true, maintainAspectRatio:false, plugins:{ title:{ display:true, text:'검사별 불량 수량' } }, scales:{ y:{ beginAtZero:true } } }
+    });
+  </script>
 </body>
 </html>
+
